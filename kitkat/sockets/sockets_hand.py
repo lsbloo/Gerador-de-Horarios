@@ -6,6 +6,8 @@ import asyncio
 import websocket
 from websocket import create_connection
 import json
+import httputil
+from datetime import date
 
 url_teste = "ws://"
 
@@ -15,6 +17,22 @@ import pandas as pd
 class MyProcessor(object):         
     def run(self, df):
         return df.agg(['mean', 'min', 'max'])
+
+class SenderData(object):
+    def __init__(self,name):
+        self.name=name 
+    
+    
+    @staticmethod
+    def sender(data_set):
+        if self.name == 'disciplines':
+            # sender data disciplines json for line archive create.
+            pass
+
+    
+def get_time_today():
+    return str(date.today)
+
 
 class KitKatWebService(object):
 
@@ -32,13 +50,18 @@ class KitKatWebService(object):
    @cherrypy.tools.json_in()
    def discipline(self):
        data = cherrypy.request.json
-       print(len(data))
        if len(data) == 0:
            cherrypy.response.status = "404 NOT FOUND"
-           cherrypy.response.header_list = [("Content-Type", 'application/json'),("Server", "KitKatWebService"),("Date", httputil.HTTPDate()),("Content-Length", "255"),]
-           cherrypy.response.body = ["Nenhuma informação sobre disciplinas encontradas"]
-           return cherrypy.response
+           cherrypy.response.header_list = [("Content-Type", 'application/json'),("Server", "KitKatWebService"),("Content-Length", "0"),]
+           cherrypy.response.body = {"error" :'Nenhuma informação sobre disciplinas encontradas'}
+           return cherrypy.response.body
+       else:
+           cherrypy.response.status = "200 OK"
+           cherrypy.response.header_list = [("Content-Type", 'application/json'),("Server", "KitKatWebService"),("Content-Length", "0"),]
+           cherrypy.response.body = {"success" :'Dados alimentados com sucesso'}
 
+
+           return cherrypy.response.body
 
 
 
