@@ -1,18 +1,25 @@
 ###
 
-from settings.settings_socket import SERVER_PORT,SERVER_HOST
-
+from settings.settings_socket import SERVER_PORT,SERVER_HOST,SERVER_DIRECTORY_SAVE
+import os
+import sys
+from os import path
 import asyncio
 import websocket
 from websocket import create_connection
 import json
 import httputil
 from datetime import date
-
-url_teste = "ws://"
-
 import cherrypy
 import pandas as pd
+
+
+FAIL_PATH_DIR = 'DONT FOUND SERVER DIRECTORY PATH SAVE JSON OBJECTS INPUT'
+FAIL_SERVER_PORT='DONT FOUND SERVER.PORT'
+FAIL_SERVER_HOST='DONT FOUND SERVER.HOST'
+
+folder_input='folders_kitkat/'
+archive_json_disciplines='disciplines.txt'
 
 class MyProcessor(object):         
     def run(self, df):
@@ -20,14 +27,41 @@ class MyProcessor(object):
 
 class SenderData(object):
     def __init__(self,name):
-        self.name=name 
+        try:
+            self.name=name
+            if SERVER_DIRECTORY_SAVE != FAIL_PATH_DIR:
+                self.dir = SERVER_DIRECTORY_SAVE+folder_input
+                re = self.check_path()
+                if re: 
+                    print('Folder created! .')
+                else:
+                    os.mkdir(self.dir)
+        except Exception as e:
+            print('SenderData Sender: ', e)
+
+
     
+    def check_path(self):
+        if self.dir != None:
+            if  path.exists(self.dir):
+                return True
+        return False
+
+    def createJsonArchive(self):
+        if self.dir != None:
+            f = open(self.dir+archive_json_disciplines,"w+")
+            return f
+        return None
     
-    @staticmethod
-    def sender(data_set):
+    def sender(self,data_set):
+        
         if self.name == 'disciplines':
             # sender data disciplines json for line archive create.
-            pass
+            f = self.createJsonArchive()
+            if f != None:
+                with open(self.dir+archive_json_disciplines, 'w') as outfile:
+                    json.dump(data_set,outfile)
+                    print('Sender Disciplines OK')
 
     
 def get_time_today():
@@ -59,12 +93,12 @@ class KitKatWebService(object):
            cherrypy.response.status = "200 OK"
            cherrypy.response.header_list = [("Content-Type", 'application/json'),("Server", "KitKatWebService"),("Content-Length", "0"),]
            cherrypy.response.body = {"success" :'Dados alimentados com sucesso'}
-
-
+           obj_sender = SenderData('disciplines')
+           obj_sender.sender(data)
            return cherrypy.response.body
 
 
-
+    
 
 myprocessor = MyProcessor()
 
