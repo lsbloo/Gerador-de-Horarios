@@ -3,10 +3,13 @@ from geradores.geratordata import getInstance
 from models.discipline import Discipline
 from models.horario import Horario
 from models.classes import Classes
+from models.enumeration import HorarioE
 import random
 
 
 #quickstart()
+
+
 class RandomHash(object):
     @staticmethod
     def gerator_id():
@@ -32,7 +35,10 @@ class GEntitys(object):
     def Ghorarios(self):
         T = []
         for i in range(len(self.data_set_horarios)):
-            T.append(Horario(self.data_set_horarios[i]["id"],self.data_set_horarios[i]["codigo"],self.data_set_horarios[i]["sequencia"]))
+            D = list(HorarioE)
+            for name in D:
+                if int(self.data_set_horarios[i]["id"]) == name.value:
+                    T.append(Horario(name.name,self.data_set_horarios[i]["codigo"],self.data_set_horarios[i]["sequencia"]))
         return {
             "Tlen": len(T) , "Tdata": T
         }
@@ -49,9 +55,7 @@ def entitys():
     return GEntitys(getInstance().get_data_disciplines(),getInstance().get_data_horarios(),getInstance().get_data_salas())
 
 
-print(entitys().Gdisciplines().get("Tlen"))
-print(entitys().Ghorarios().get("Tlen"))
-print(entitys().GSalas().get("Tlen"))
+
 
 
 
