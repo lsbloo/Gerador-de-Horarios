@@ -1,6 +1,6 @@
 from enum import Enum
 
-class Horario(Enum):
+class HorarioE(Enum):
     SEGUNDA_8H=1
     SEGUNDA_10H=2
     SEGUNDA_13H=3
@@ -12,9 +12,9 @@ class Horario(Enum):
     QUARTA_13H=9
     QUINTA_8H=10
     QUINTA_10H=11
-    QUINTA_13H=13
-    SEXTA_8H=14
-    SEXTA_10H=15
-    SEXTA_13H=16
-    
+    QUINTA_13H=12
+    SEXTA_8H=13
+    SEXTA_10H=14
+    SEXTA_13H=15
+
 
