@@ -21,13 +21,31 @@ class GEntitys(object):
         self.data_set_horarios=data_set_horarios
         self.data_set_salas=data_set_salas
     
+    def splitter(self,curso):
+        q = curso.split("/")
+        if len(q) > 1:
+            return q
+        return None
     def Gdisciplines(self):
         T = []
         for i in range(len(self.data_set_disciplines)):
             if self.data_set_disciplines[i]["id"] != "":
-                T.append(Discipline(self.data_set_disciplines[i]["nome"],self.data_set_disciplines[i]["curso"],self.data_set_disciplines[i]["periodo"],self.data_set_disciplines[i]["id"],self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None))
+                q = self.splitter(self.data_set_disciplines[i]["curso"])
+                if q!=None:
+                    disp1 = Discipline(self.data_set_disciplines[i]["nome"],q[0],self.data_set_disciplines[i]["periodo"],self.data_set_disciplines[i]["id"],self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None)
+                    disp2 = Discipline(self.data_set_disciplines[i]["nome"],q[1],self.data_set_disciplines[i]["periodo"],self.data_set_disciplines[i]["id"],self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None)
+                    T.append(disp1)
+                    T.append(disp2)
+                else:
+                    T.append(Discipline(self.data_set_disciplines[i]["nome"],self.data_set_disciplines[i]["curso"],self.data_set_disciplines[i]["periodo"],self.data_set_disciplines[i]["id"],self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None))
             else:
-                T.append(Discipline(self.data_set_disciplines[i]["nome"],self.data_set_disciplines[i]["curso"],self.data_set_disciplines[i]["periodo"],RandomHash.gerator_id(),self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None))
+                if q!=None:
+                    disp1 = Discipline(self.data_set_disciplines[i]["nome"],q[0],self.data_set_disciplines[i]["periodo"],RandomHash.gerator_id(),self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None)
+                    disp2 = Discipline(self.data_set_disciplines[i]["nome"],q[1],self.data_set_disciplines[i]["periodo"],RandomHash.gerator_id(),self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None)
+                    T.append(disp1)
+                    T.append(disp2)
+                else:
+                    T.append(Discipline(self.data_set_disciplines[i]["nome"],self.data_set_disciplines[i]["curso"],self.data_set_disciplines[i]["periodo"],RandomHash.gerator_id(),self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None))
 
         return {
             "Tlen" : len(T), "Tdata": T 
@@ -50,6 +68,11 @@ class GEntitys(object):
         return {
             "Tlen": len(T), "Tdata": T
         }
+    
+    def GCromosome(self,gDataDiscipline):
+        pass
+
+
 
 def entitys():
     return GEntitys(getInstance().get_data_disciplines(),getInstance().get_data_horarios(),getInstance().get_data_salas())

@@ -4,7 +4,7 @@
 Representa o cromossomo contido no individuo.
 """
 class Chromosome(object):
-    def __init__(self,id=0,discipline):
+    def __init__(self,id,discipline):
         self.id=id
         self.discipline=discipline
     

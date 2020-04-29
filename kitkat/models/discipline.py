@@ -23,6 +23,9 @@ class Discipline(object):
 
     def setter_id(self,id_setter):
         self.id=id_setter
+    
+    def toString(self):
+        return "Name:" , self.name, " professor:", self.professor , "curso: ", self.curso
 
 class ListDisciplines(object):
     def __init__(self,list_disciplines):
