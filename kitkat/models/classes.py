@@ -5,12 +5,19 @@
 """
 class Classes(object):
 
-    def __init__(self,sala,horario,dia,id=0):
-        self.sala=sala
-        self.horario=horario
-        self.dia=dia
+    def __init__(self,id,codigo,capacidade):
+        self.codigo=codigo
+        self.capacidade=capacidade
         self.id=0
     
+   
+    def set_horario(self,horario):
+        self.horario=horario
+    
+    def get_horario(self):
+        return self.horario
+    
+
     def get_id(self):
         return self.id
     
