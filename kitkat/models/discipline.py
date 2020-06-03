@@ -13,7 +13,7 @@ class Discipline(object):
         self.credito=credito
         self.professor=professor
 
-        ### Lista da Grade Aulas em uma disciplina. 
+        ### Lista da Grade Aulas em uma disciplina. GENOMA
         self.list_classes=list_classes
     
 

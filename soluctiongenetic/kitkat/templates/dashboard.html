@@ -1,0 +1,174 @@
+{% extends 'basedash.html' %}
+{% load static %}
+{% block content %}
+
+            <div>
+            <h3><b>Configuração de Critérios</b></h3>
+        </div>
+            <br>
+            
+                <div class="row justify-content-md-center">
+                        <div class="col col-lg-2"style="margin-right: 80%;">
+                            <div id="aviso" class="alert alert-warning">
+                                <strong id="msg"></strong>
+                        </div>
+                          </div>
+                        <div class="col-md-auto" style="margin-left: 80%;">
+                            
+                            <button id="csrf_token" value="{{ csrf_token }}" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >Adicionar</button>
+
+                        </div>
+            </div>
+        
+        <br>
+        <div class="portlet light">
+            <div class="portlet-title tabbable-line">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th><b>#Id</b></th>
+                                <th><b>Nome</b></th>
+                                <th><b>Descrição</b></th>
+                                <th><b>Peso</b></th>
+                                <th><b>Tipo de Restrição</b></th>
+                                <th><b>*</b></th>
+                                <th><b>*</b></th>
+                            </tr>
+                        </thead>
+                        {% for r in criterios_list %}
+                        <tbody>
+                            <th scope="row">{{r.id}}</th>
+                            <td>{{r.name}}</td>
+                            <td>{{r.description}}</td>
+                            <td>{{r.rate}}</td>
+                            <td><b>{{r.constraint}}</b></td>
+                            <td>
+                                <a class="btn btn-warning" href="{% url 'kitkat:edit_criterio' pk=r.id %}" role="button">Editar</a>      
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" href="{% url 'kitkat:remove_criterio' pk=r.id %}" role="button">Remover</a>
+                            </td>
+
+                        </tbody>
+                        
+                        {% endfor %}
+                        </table>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+           
+           var x_created = "/kitkat/dashboard/?message=created";
+           var x_deleted = "/kitkat/dashboard/?message=deleted";
+           var x_edited = "/kitkat/dashboard/?message=edited";
+
+            var url = "{{ request.get_full_path }}";
+            console.log(url);
+
+             
+            if (x_created == url) {
+                
+                var c = "Criado com sucesso";
+
+                alert(c);            
+
+                setTimeout(function () {
+                    $('#aviso').innerHTML ="<div id='aviso' class='alert alert-success'><strong id='msg'>"+c+"</strong></div>";
+
+                     $('#aviso').hide(); 
+            }, 3500);
+            }else if(x_deleted == url){
+                var c = "Deletado com sucesso";
+
+                alert(c); 
+            }else if(x_edited == url){
+                var c = "Editado com sucesso";
+                alert(c);
+
+            }
+
+            
+        });
+    </script>
+    <script type="text/javascript">
+
+
+        $('[data-toggle="modal"]').on('click',function(e){
+            var essay_id = $(this).attr('id');
+            var token = document.getElementById('csrf_token').value;
+            jQuery.noConflict();
+            $('#myModal').modal('show');
+        });
+    </script>
+
+
+<div id="myModal" class="modal fade" role="dialog" style="width: 100%; height: 100%;">
+
+    <div class="modal-dialog">
+                            
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                            <h1><b>EDIÇÃO DE CRITÉRIO</b></h1>
+                </div>
+                <div id="modal_create">
+                        <div class="portlet-body">
+                                <div class="row">
+
+
+                                    <div class="col-sm-5" style="min-height: 280px;">
+                                        <form action="/kitkat/generate/" class="dados-do-delivery" method="post">
+                                            {% csrf_token %}
+                                            {% if form.errors %}
+                                            {{ form.errors }}
+                                            {% endif %}
+
+                                            
+                                            <div class="col-md-10">
+
+                                                <label style="margin-top: 5px;"><b>Nome</b></label>
+                                                <input style="width: 400px;"type="text" required name="name" class="form-control" placeholder="" value="">
+
+                                            </div>
+                                            <div class="col-md-10">
+
+                                                <label><b>Descrição</b></label>
+                                                <textarea style="width: 400px;" type="text" required name="description" class="form-control" placeholder="" value=""></textarea>
+
+                                            </div>
+                                            
+                                            <br>
+                                            <div class="col-md-10">
+                                                <label><b>Peso</b></label>
+                                                <select class="form-control" name="rate" id="exampleFormControlSelect1">
+                                                    <option>10</option>
+                                                    <option>1000</option>
+                                                </select>
+
+                                            <br>
+                                            </div>
+                                            <div class="col-md-5">
+                                            <button type="submit" style="margin-bottom: 5px;" class="btn btn-success ">Salvar</button>
+                                        </div>
+                                        </form>
+
+                                    
+
+                   
+                </div>
+
+
+                </div>
+                <div class="modal-footer">                
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

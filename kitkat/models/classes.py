@@ -1,7 +1,7 @@
 
 
 """
-    Representa as aulas (Genes)
+    Representa as aulas (Genes) AULA
 """
 class Classes(object):
 

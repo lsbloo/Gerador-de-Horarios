@@ -11,6 +11,7 @@ import random
 
 
 class RandomHash(object):
+    
     @staticmethod
     def gerator_id():
         return random.getrandbits(128)
@@ -76,6 +77,17 @@ class GEntitys(object):
 
 def entitys():
     return GEntitys(getInstance().get_data_disciplines(),getInstance().get_data_horarios(),getInstance().get_data_salas())
+
+
+dt_discipline = entitys().Gdisciplines()
+print(dt_discipline.get('Tlen'))
+
+dt_horario = entitys().Ghorarios()
+print(dt_horario.get('Tlen'))
+
+
+dt_salas = entitys().GSalas()
+print(dt_salas.get('Tlen'))
 
 
 
