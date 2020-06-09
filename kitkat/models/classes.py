@@ -1,4 +1,5 @@
 
+from random import random
 
 """
     Representa as aulas (Genes) AULA
@@ -9,6 +10,12 @@ class Classes(object):
         self.codigo=codigo
         self.capacidade=capacidade
         self.id=0
+        self.horario = 0
+        if random() < 0.5:
+            self.cromossomo = "0"
+        else:
+            self.cromossomo = "1"
+
     
    
     def set_horario(self,horario):
