@@ -91,6 +91,7 @@ dt_horario = entitys().Ghorarios()
 dt_salas = entitys().GSalas()
 
 
+
 salas = dt_salas.get('Tdata')
 disciplinas = dt_discipline.get('Tdata')
 horarios = dt_horario.get('Tdata')
@@ -245,13 +246,13 @@ class Individuo(object):
             if q[k][1] == d[1]:
                 if q[k][2] == d[2]:
                     if q[k][3] == d[3]:
-                        #print("search: ", q[k][0],q[k][1], q[k][2],q[k][3], q[k][4])
-                        #print("DSerach: ", d[0], d[1],d[2],d[3], d[4])
-                        return 0
+                        #print("search: ", q[k][0],q[k][1], q[k][2],q[k][3])
+                        #print("DSerach: ", d[0], d[1],d[2],d[3])
+                        return 1000
                     else:
                         d = q[k]
                         #print("D: ", d[0], d[3], d[4])
-        return 1000
+        return 10
 
 
     """
@@ -278,21 +279,19 @@ class Individuo(object):
             
             q.append([disp[i][0],disp[i][1],disp[1][2],horarios_temp[:]])
         d = q[0]
-        
         cont=0
         q.remove(d)
         for k in range(len(q)):
             cont = 0
-            if q[k][1] == d[1]:
-                #print(q[k][1], d[1])
-                #print(q[k][3], d[3])
-                if q[k][3] == d[3]:
-                    #print(q[k][3], d[3])
-                    return 0
-            else:
-                d = q[k]
-                #print("D: ", d[0], d[3], d[4])
-        return 1000
+            if q[k][1] == d[1] and q[k][0] == d[0]:
+                for n in range(len(q[k][3])):
+                    if q[k][3].count(q[k][3][n]) >= 2:
+                        #print(q[k][3])
+                        return 1000
+                    else:
+                        d = q[k]
+                        #print("D: ", d[0], d[3], d[4])
+        return 10
 
     """
      Para  avaliar  o  cromossomo,  é  levado  em  consideração  o  seguinte:  
@@ -332,25 +331,34 @@ class Individuo(object):
                         #print(q[k][3])
                         agrupamentos+=1
         
-        penalizacao_ = 1000*agrupamentos
+        penalizacao_ = agrupamentos
         return penalizacao_
 
     def comparator(self,key_values,values_result):
         qnt_de_restricoes = len(key_values)
         for i in range(qnt_de_restricoes):
             if values_result[i] == 1000:
-                self.nota_avaliacao = 1*1000
+                self.nota_avaliacao = 1
+                return False
             else:
                 if key_values[i] == 2:
-                    self.nota_avaliacao = values_result[i]
+                    self.nota_avaliacao += values_result[i]
+                if key_values[i] == 1 and values_result[i] != 1000:
+                    self.nota_avaliacao += values_result[i]
+                if key_values[i] == 3 and values_result[i] != 1000:
+                    self.nota_avaliacao += values_result[i]
                 if key_values[i] == 4:
-                    return True
+                    return {"penalizacao": True, "result": values_result[i]}
         return False 
 
 
 
     def fitness(self,restricoes):
         restricoes_actived_result = []
+        
+        if len(restricoes) == 0:
+            self.nota_avaliacao = random.randint(1,100)
+        
         for k in range(len(restricoes)):
             disp = restricoes[k].id_funcao
             restricoes_actived_result.append({"id_f": disp,"result": self.switcher(disp)})
@@ -370,23 +378,22 @@ class Individuo(object):
                 values_result.append(restricoes_actived_result[i].get("result"))
             
             result = self.comparator(key_values,values_result)
-            # apply penalização
-            if result and self.nota_avaliacao != 1:
-                penalizacao = self.penalizacao_disciplinas_dia()
-                if penalizacao == 0:
-                    if self.nota_avaliacao != 1000:
-                        self.nota_avaliacao = self.nota_avaliacao * 1000
-                else:
-                    if self.nota_avaliacao != 1000 and self.nota_avaliacao !=0:
-                        self.nota_avaliacao = self.nota_avaliacao * 1000
-                        self.nota_avaliacao = self.nota_avaliacao - penalizacao
-                    else:
-                        self.nota_avaliacao = self.nota_avaliacao - penalizacao
+            if type(result) == bool:
+                if self.nota_avaliacao == 1:
+                    self.nota_avaliacao=1000
+            else:
+                # apply penalização
+                if result.get("penalizacao") and self.nota_avaliacao != 1:
+                    if result.get("result") != 0:
+                        if self.nota_avaliacao != 1:
+                            if self.nota_avaliacao == 0:
+                                self.nota_avaliacao = random.randint(1,100)
+                            else:
+                                self.nota_avaliacao = self.nota_avaliacao + result.get("result") #penalizacao
+            
 
-            elif result == False and self.nota_avaliacao != 1000:
-                self.nota_avaliacao = self.nota_avaliacao * 1000
-
-            #print("NOTA: ",self.nota_avaliacao)
+            if self.nota_avaliacao == 0:
+                self.nota_avaliacao = random.randint(1,100)
         except KeyError as e:
             pass
     
@@ -450,11 +457,8 @@ class AlgoritmoGenetico(object):
         
              
     def melhor_individuo(self,individuo):
-        if individuo.nota_avaliacao != 1000 and self.melhor_solucao.nota_avaliacao != 1000:
-            if (individuo.nota_avaliacao < self.melhor_solucao.nota_avaliacao):
-                self.melhor_solucao = individuo
-        else:
-            self.melhor_solucao = self.populacao[0]
+        if individuo.nota_avaliacao < self.melhor_solucao.nota_avaliacao:
+            self.melhor_solucao = individuo
         return self
     
     def len_populacao(self):
@@ -465,7 +469,7 @@ class AlgoritmoGenetico(object):
     def return_populacao(self):
         return self.populacao
 
-algoritmoGenetico = AlgoritmoGenetico(3)
+algoritmoGenetico = AlgoritmoGenetico(1)
 
 limite_restricoes = 3
 
@@ -488,12 +492,15 @@ restricoes.append(constraint3)
 restricoes.append(constraint4)
 
 for individuo in algoritmoGenetico.return_populacao():
+    #individuo.toString()
     individuo.fitness(restricoes)
 
 
 algoritmoGenetico.ordena_populacao()
 
-r = algoritmoGenetico.melhor_individuo(algoritmoGenetico.populacao[0])
+for i in range(algoritmoGenetico.len_populacao()):
+
+    r = algoritmoGenetico.melhor_individuo(algoritmoGenetico.populacao[i])
 print("melhor", r.melhor_solucao.nota_avaliacao)
 
 
