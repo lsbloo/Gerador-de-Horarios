@@ -33,6 +33,7 @@ class GEntitys(object):
                 else:
                     T.append(Discipline(self.data_set_disciplines[i]["nome"],self.data_set_disciplines[i]["curso"],self.data_set_disciplines[i]["periodo"],self.data_set_disciplines[i]["id"],self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None))
             else:
+                q = self.splitter(self.data_set_disciplines[i]["curso"])
                 if q!=None:
                     disp1 = Discipline(self.data_set_disciplines[i]["nome"],q[0],self.data_set_disciplines[i]["periodo"],RandomHash.gerator_id(),self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None)
                     disp2 = Discipline(self.data_set_disciplines[i]["nome"],q[1],self.data_set_disciplines[i]["periodo"],RandomHash.gerator_id(),self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None)
@@ -87,20 +88,46 @@ tamanho_salas = len(salas)
 class GeradorObject(object):
 
     @staticmethod
+    def generate_chave_especific(horarios,k,repeticoes):
+        
+        f = random.choices(horarios,k=repeticoes)
+        horarios_list= []
+        
+        for element in k:
+            for horario in element[4]:
+                horarios_list.append(horario.codigo)
+        
+        for i in range(len(f)):
+            while f[i].codigo in horarios_list:
+                f = random.choices(horarios,k=repeticoes)
+                
+        
+        return f
+    
+
+    @staticmethod
+    def generate_horarios_by_sala_pesos(qnt_aulas_disciplina,pesos,horarios):
+        return random.choices(horarios,weights=pesos,k=qnt_aulas_disciplina)
+
+    @staticmethod
+    def get_horarios():
+        return horarios
+
+    @staticmethod
     def generate_horarios_by_sala(qnt_aulas_disciplina,salas,horarios):
-        dList=[]
-        for i in range(qnt_aulas_disciplina):
-            aux = random.randint(0,len(salas)-1)
-            dList.append(horarios[aux])
-        return dList
+        pesos = [0]*len(horarios)
+        print()
+        for n in range(len(horarios)):
+            pesos[n] = 1
+
+        return random.choices(horarios,weights=pesos,k=qnt_aulas_disciplina)
     
     @staticmethod
     def generate_sala_by_discipline(qnt_aulas_disciplina,salas,horarios):
         dList=[]
         horarios_ = GeradorObject.generate_horarios_by_sala(qnt_aulas_disciplina,salas,horarios)
-        for i in range(qnt_aulas_disciplina):
-            aux = random.randint(0,len(salas)-1)
-            dList.append(salas[aux])
+        aux = random.randint(0,len(salas)-1)
+        dList.append(salas[aux])
         for i in dList:
             i.horario = horarios_
         return dList
@@ -111,10 +138,10 @@ class GeradorObject(object):
         salasx = random.sample(salas,len(salas))
         disciplinasx = random.sample(disciplinas,len(disciplinas))
         horariosx = random.sample(horarios,len(horarios))
-        for i in range(len(disciplinasx)):
+        for i in range(len(disciplinas)):
             disciplinas[i].list_classes = GeradorObject.generate_sala_by_discipline(qnt_aulas_disciplina,salasx,horariosx)
-            #print(len(disciplinas[i].list_classes))
             list_set.append(disciplinas[i])
         return random.sample(list_set,len(list_set))
+
 
 

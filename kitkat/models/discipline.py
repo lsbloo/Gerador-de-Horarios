@@ -17,6 +17,19 @@ class Discipline(object):
         self.list_classes=list_classes
     
 
+    def horarios_disponiveis(self):
+        q = " "
+        for i in self.list_classes:
+            for k in i.horario:
+                #print(k)
+                q+= k.toString()
+                q+=","
+        return q
+
+    def toString(self):
+        return "Disciplina: {name}, Curso: {curso}, Periodo: {periodo}, Professor: {professor}, \n Horarios: {horario}".format(name=self.name,
+        curso=self.curso,periodo=self.periodo,professor=self.professor,horario=self.horarios_disponiveis())
+    
     def get_id(self):
         return self.id
 
@@ -24,8 +37,6 @@ class Discipline(object):
     def setter_id(self,id_setter):
         self.id=id_setter
     
-    def toString(self):
-        return "Name:" , self.name, " professor:", self.professor , "curso: ", self.curso
 
 class ListDisciplines(object):
     def __init__(self,list_disciplines):
