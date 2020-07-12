@@ -1,0 +1,226 @@
+
+from readerJson import getInstance
+from models import Discipline
+from models import Horario
+from models import Classes
+from enumeration import HorarioE
+from random import random as rd
+import random
+from util import RandomHash
+import json
+
+class GEntitys(object):
+    def __init__(self,data_set_disciplines,data_set_horarios,data_set_salas):
+        self.data_set_disciplines=data_set_disciplines
+        self.data_set_horarios=data_set_horarios
+        self.data_set_salas=data_set_salas
+    
+    def splitter(self,curso):
+        q = curso.split("/")
+        if len(q) > 1:
+            return q
+        return None
+    def Gdisciplines(self):
+        T = []
+        for i in range(len(self.data_set_disciplines)):
+            if self.data_set_disciplines[i]["id"] != "":
+                q = self.splitter(self.data_set_disciplines[i]["curso"])
+                if q!=None:
+                    disp1 = Discipline(self.data_set_disciplines[i]["nome"],q[0],self.data_set_disciplines[i]["periodo"],self.data_set_disciplines[i]["id"],self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None)
+                    disp2 = Discipline(self.data_set_disciplines[i]["nome"],q[1],self.data_set_disciplines[i]["periodo"],self.data_set_disciplines[i]["id"],self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None)
+                    T.append(disp1)
+                    T.append(disp2)
+                else:
+                    T.append(Discipline(self.data_set_disciplines[i]["nome"],self.data_set_disciplines[i]["curso"],self.data_set_disciplines[i]["periodo"],self.data_set_disciplines[i]["id"],self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None))
+            else:
+                q = self.splitter(self.data_set_disciplines[i]["curso"])
+                if q!=None:
+                    disp1 = Discipline(self.data_set_disciplines[i]["nome"],q[0],self.data_set_disciplines[i]["periodo"],RandomHash.gerator_id(),self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None)
+                    disp2 = Discipline(self.data_set_disciplines[i]["nome"],q[1],self.data_set_disciplines[i]["periodo"],RandomHash.gerator_id(),self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None)
+                    T.append(disp1)
+                    T.append(disp2)
+                else:
+                    T.append(Discipline(self.data_set_disciplines[i]["nome"],self.data_set_disciplines[i]["curso"],self.data_set_disciplines[i]["periodo"],RandomHash.gerator_id(),self.data_set_disciplines[i]['credito'],self.data_set_disciplines[i]['professor'],None))
+
+        return {
+            "Tlen" : len(T), "Tdata": T 
+        }
+    def Ghorarios(self):
+        T = []
+        for i in range(len(self.data_set_horarios)):
+            D = list(HorarioE)
+            for name in D:
+                if int(self.data_set_horarios[i]["id"]) == name.value:
+                    T.append(Horario(name.name,self.data_set_horarios[i]["codigo"],self.data_set_horarios[i]["sequencia"]))
+        return {
+            "Tlen": len(T) , "Tdata": T
+        }
+    def GSalas(self):
+        T = []
+        for i in range(len(self.data_set_salas)):
+            T.append(Classes(RandomHash.gerator_id(), self.data_set_salas[i]["codigo"], self.data_set_salas[i]["capacidade"]))
+        return {
+            "Tlen": len(T), "Tdata": T
+        }
+    
+    def GCromosome(self,gDataDiscipline):
+        pass
+
+def entitys():
+    return GEntitys(getInstance().get_data_disciplines(),getInstance().get_data_horarios(),getInstance().get_data_salas())
+
+
+
+dt_discipline = entitys().Gdisciplines()
+dt_horario = entitys().Ghorarios()
+
+dt_salas = entitys().GSalas()
+
+
+
+salas = dt_salas.get('Tdata')
+disciplinas = dt_discipline.get('Tdata')
+horarios = dt_horario.get('Tdata')
+tamanho_salas = len(salas)
+
+from copy import deepcopy
+variavel_global = []
+class GeradorObject(object):
+
+    @staticmethod
+    def recreateDisciplines(disciplines, dList, individual,QUANTIDADE_AULAS_POR_DISCIPLINA):
+        horarios_depois_da_recriacao = []
+        counter = -1
+        horarios_antes_da_recriacao = []
+        for disciplina in disciplines:
+            for aulas in disciplina.list_classes:
+                counter+=1
+                horarios_antes_da_recriacao.append(aulas.horario.id)
+                horarios_depois_da_recriacao.append(dList[individual[counter]])
+        new_disp =[]
+        dt = deepcopy(disciplines)
+        #print(horarios_depois_da_recriacao)
+        for i in range(len(dt)):
+            disciplina = Discipline(dt[i].name,dt[i].curso,dt[i].periodo,dt[i].id,
+            dt[i].credito,dt[i].professor,[0]*QUANTIDADE_AULAS_POR_DISCIPLINA)
+            new_disp.append(disciplina)
+        fragments_new_recriacao = GeradorObject.unzipy(QUANTIDADE_AULAS_POR_DISCIPLINA,individual)
+        counter=0
+        variavel_global.clear()
+        while counter < len(new_disp):
+            GeradorObject.activateRecreate(counter,len(new_disp),new_disp,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA)
+            #print(variavel_global[counter].list_classes[0].horario.id,variavel_global[counter].list_classes[1].horario.id)
+            counter+=1
+            if counter == len(new_disp):
+                return variavel_global
+ 
+    @staticmethod
+    def activateRecreate(counter,total,new_disp,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA):
+        if counter < total:
+            f = GeradorObject.getDiscipline(new_disp,counter,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA)
+            #print(f.list_classes[0].horario.id,f.list_classes[1].horario.id)
+            variavel_global.append(f)
+            # desativei a recursividade e coloquei uma variavel global
+            #GeradorObject.activateRecreate(counter,total,new_disp,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA)
+        else:
+            return True
+    
+    @staticmethod
+    def getDiscipline(new_disp,position,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA):
+        new_disp[position].list_classes=GeradorObject.recreateClasse(salas,dList,fragments_new_recriacao[position],QUANTIDADE_AULAS_POR_DISCIPLINA)
+        return new_disp[position]    
+                 
+    @staticmethod
+    def unzipy(splice,individual):
+        q = []
+        for i in range(0,len(individual), splice):
+            q.append( individual[i:i + splice] )
+        return q
+        
+    @staticmethod
+    def recreateClasse(salas,dList,horarios_recriados,QUANTIDADE_AULAS_POR_DISCIPLINA):
+        #print("Recriação: ",horario_recriado)
+        result=[]
+        for i in range(QUANTIDADE_AULAS_POR_DISCIPLINA):
+            aux = random.randint(0,len(salas)-1)
+            sala = (salas[aux])
+            #print(dList[horarios_recriados[i]])
+            sala.horario = Horario(dList[horarios_recriados[i]],0,0)
+            result.append(sala)
+        
+        return result
+        
+    @staticmethod
+    def get_len_horarios_enumeration():
+        return len(HorarioE)
+    
+
+    @staticmethod
+    def get_list_horarios_by_enum():
+        aux = list(HorarioE)
+        list_horarios =[]
+        for horario_enum in aux:
+            list_horarios.append(horario_enum.name)
+        
+        return list_horarios
+
+    @staticmethod
+    def generate_chave_especific(horarios,k,repeticoes):
+        
+        f = random.choices(horarios,k=repeticoes)
+        horarios_list= []
+        
+        for element in k:
+            for horario in element[4]:
+                horarios_list.append(horario.codigo)
+        
+        for i in range(len(f)):
+            while f[i].codigo in horarios_list:
+                f = random.choices(horarios,k=repeticoes)
+                
+        
+        return f
+    
+
+    @staticmethod
+    def generate_horarios_by_sala_pesos(qnt_aulas_disciplina,pesos,horarios):
+        return random.choices(horarios,weights=pesos,k=qnt_aulas_disciplina)
+
+    @staticmethod
+    def get_horarios():
+        return horarios
+    @staticmethod
+    def get_salas():
+        return salas
+
+    @staticmethod
+    def generate_horarios_by_sala(salas,horarios):
+        pesos = [0]*len(horarios)
+        for n in range(len(horarios)):
+            pesos[n] = 1
+        return random.choices(horarios,weights=pesos)[0]
+    
+    @staticmethod
+    def generate_aula_by_discipline(salas,horarios):
+        dList=[]
+        horarios_ = GeradorObject.generate_horarios_by_sala(salas,horarios)
+        aux = random.randint(0,len(salas)-1)
+        dList.append(salas[aux])
+        for i in dList:
+            i.horario = horarios_
+        return dList
+
+    @staticmethod
+    def generate_disciplines(qnt_aulas_disciplina):
+        list_set = []
+        salasx = random.sample(salas,len(salas))
+        disciplinasx = random.sample(disciplinas,len(disciplinas))
+        horariosx = random.sample(horarios,len(horarios))
+        for i in range(len(disciplinasx)):
+            disciplinas[i].list_classes = []
+            for k in range(qnt_aulas_disciplina):
+                disciplinas[i].list_classes.append(GeradorObject.generate_aula_by_discipline(salasx,horariosx)[0])
+            list_set.append(disciplinas[i])
+        return list_set
+
+    
