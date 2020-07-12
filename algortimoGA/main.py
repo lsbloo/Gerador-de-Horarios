@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 from ativacoes import R1
 
 
-
 # GERATOR DE OBJETOS
 from geratores import GeradorObject
 
@@ -70,24 +69,24 @@ toolbox.register("mate", tools.cxOnePoint)
 # função de mutação;
 toolbox.register("mutate",tools.mutUniformInt,low=0,up=GeradorObject.get_len_horarios_enumeration()-1,indpb=0.10)
 
-#toolbox.register("mutate",tools.mutFlipBit,indpb=0.10)
+
 
 # seleciona o melhor individuo da geração pelo metodo da roleta
 # individuo com maior nota tem maior probabilidade de ser escolhido
 toolbox.register("select", tools.selRoulette)
 
-random.seed(1)
 
-populacao = toolbox.population(n=1)
+populacao = toolbox.population(n=100)
 probabilidade_crossver = 1.0
 probabilidade_mutacao = 0.10
-numero_geracoes=0
+numero_geracoes=200
 
 estatisticas = tools.Statistics(key=lambda individuo: individuo.fitness.values)
 estatisticas.register("max", numpy.max)
 estatisticas.register("avg", numpy.mean, axis=0)
 estatisticas.register("std", numpy.std, axis=0)
 estatisticas.register("min", numpy.min, axis=0)
+
 populacao, info = algorithms.eaSimple(populacao,toolbox,
                     probabilidade_crossver,probabilidade_mutacao,
                     numero_geracoes,estatisticas)
@@ -104,7 +103,7 @@ plt.show()
 
 
 print(melhor[0])
-"""
+
 print()
 dList = GeradorObject.get_list_horarios_by_enum()
 melhor = GeradorObject.recreateDisciplines(disciplines,dList,melhor[0],QUANTIDADE_AULAS_POR_DISCIPLINA)
@@ -118,4 +117,3 @@ s = lcc_list
 lcc_list = sorted(s,key=lambda discipline: discipline.periodo, reverse=True)
 for d in lcc_list:
     print(d.toString())
-"""

@@ -1,0 +1,405 @@
+{
+	"disciplines": [
+		{
+		"id": "8103104",
+		"periodo": "p1",
+		"credito": "4",
+		"professor":"Ayla",
+		"nome":"Introducao a Programacao TUR 1",
+		"curso": "si/lcc"
+		},
+		{
+		"id": "8103104",
+		"periodo": "p1",
+		"credito": "4",
+		"professor":"Ana Liz",
+		"nome":"Introducao a Programacao TUR 2",
+		"curso": "si/lcc"
+		},
+		{
+		"id": "8103106",
+		"periodo": "p1",
+		"credito": "4",
+		"professor":"Ana Liz",
+		"nome":"Introducao ao Computador",
+		"curso": "si"
+		},
+		{
+		"id": "8101306",
+		"periodo": "p1",
+		"credito": "4",
+		"professor":"Substituto",
+		"nome":"Metodologia Cientifica",
+		"curso": "si"
+		},
+		{
+		"id": "8108108",
+		"periodo": "p1",
+		"credito": "4",
+		"professor":"Laudelino",
+		"nome":"Matematica Elementar",
+		"curso": "si"
+		},
+		{
+		"id": "8103141",
+		"periodo": "p3",
+		"credito": "4",
+		"professor":"Wagner",
+		"nome":"Alg. e Estrutura de Dados 1",
+		"curso": "si"
+		},
+		{
+		"id": "8103138",
+		"periodo": "p3",
+		"credito": "4",
+		"professor":"Raquel",
+		"nome":"Prog. Orientada a Objetos - POO",
+		"curso": "si"
+		},
+		{
+		"id": "8103144",
+		"periodo": "p3",
+		"credito": "4",
+		"professor":"Wendell",
+		"nome":"Algebra Linear e Geom. Analitica",
+		"curso": "si/lcc"
+		},
+		{
+		"id": "8103148",
+		"periodo": "p5",
+		"credito": "4",
+		"professor":"Leandro",
+		"nome":"Banco de Dados I",
+		"curso": "si"
+		},
+		{
+		"id": "8103155",
+		"periodo": "p5",
+		"credito": "4",
+		"professor":"Juliana/Yuska",
+		"nome":"Eng. de Software Aplicada",
+		"curso": "si"
+		},
+		{
+		"id": "8103148",
+		"periodo": "p5",
+		"credito": "4",
+		"professor":"Leandro",
+		"nome":"Banco de Dados I",
+		"curso": "si"
+		},
+		{
+		"id": "8103215",
+		"periodo": "p5",
+		"credito": "4",
+		"professor":"Raquel",
+		"nome":"Sistemas Operacionais",
+		"curso": "si"
+		},
+		{
+		"id": "8103152",
+		"periodo": "p5",
+		"credito": "4",
+		"professor":"Hacks",
+		"nome":"Redes de Computadores",
+		"curso": "si"
+		},
+		{
+		"id": "8103145",
+		"periodo": "p5",
+		"credito": "4",
+		"professor":"Adson",
+		"nome":"Pesquisa Aplicada SI",
+		"curso": "si"
+		},
+		{
+		"id": "8103218",
+		"periodo": "p7",
+		"credito": "4",
+		"professor":"Leandro",
+		"nome":"Desenv. de Sist. Corporativos",
+		"curso": "si"
+		},
+		{
+		"id": "8103215",
+		"periodo": "p7",
+		"credito": "4",
+		"professor":"Yuska",
+		"nome":"Gestão da Qualidade SW",
+		"curso": "si"
+		},
+		{
+		"id": "8103161",
+		"periodo": "p7",
+		"credito": "4",
+		"professor":"Marcus",
+		"nome":"Sistemas Distribuidos",
+		"curso": "si"
+		},
+		{
+		"id": "8103209",
+		"periodo": "p7",
+		"credito": "4",
+		"professor":"Hacks",
+		"nome":"Auditoria e Seg. de Sistemas",
+		"curso": "si"
+		},
+		{
+		"id": "8103160",
+		"periodo": "p7",
+		"credito": "4",
+		"professor":"Luiz",
+		"nome":"Sistemas de Apoio a Gestão",
+		"curso": "si"
+		},
+		{
+		"id": "8103157",
+		"periodo": "p7",
+		"credito": "4",
+		"professor":"Marcus",
+		"nome":"Intelig. Artificial e Sistemas Espec.",
+		"curso": "si/lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p1",
+		"credito": "4",
+		"professor":"Vanessa/Rafael",
+		"nome":"IP",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p1",
+		"credito": "4",
+		"professor":"Thaíse",
+		"nome":"Metodologia",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p1",
+		"credito": "4",
+		"professor":"Laudelino",
+		"nome":"Mat. Elementar",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p1",
+		"credito": "4",
+		"professor":"Josevandro",
+		"nome":"Calculo 1",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p1",
+		"credito": "4",
+		"professor":"Scaico",
+		"nome":"Int. Comp",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p2",
+		"credito": "4",
+		"professor":"Ayla",
+		"nome":"Ling. Programação.",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p2",
+		"credito": "4",
+		"professor":"Augusto",
+		"nome":"Arquitetura I",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p2",
+		"credito": "4",
+		"professor":"Whendel",
+		"nome":"Vetorial",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p2",
+		"credito": "4",
+		"professor":"Josevandro",
+		"nome":"Calculo II",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p3",
+		"credito": "4",
+		"professor":"Wagner",
+		"nome":"Estr. de Dados",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p3",
+		"credito": "4",
+		"professor":"Rafael",
+		"nome":"Arquitetura II",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p3",
+		"credito": "4",
+		"professor":"Substituto",
+		"nome":"Lógica",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p3",
+		"credito": "4",
+		"professor":"Whendel",
+		"nome":"Algebra Linear",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p3",
+		"credito": "4",
+		"professor":"Rodrigo Vilar",
+		"nome":"POO",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p4",
+		"credito": "4",
+		"professor":"Pasqueline",
+		"nome":"Mod. de dados",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p4",
+		"credito": "4",
+		"professor":"Raquel",
+		"nome":"SO.",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p4",
+		"credito": "4",
+		"professor":"Pasqueline",
+		"nome":"Mod. de dados",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p4",
+		"credito": "4",
+		"professor":"Pasqueline",
+		"nome":"Pesquisa Aplicada",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p4",
+		"credito": "4",
+		"professor":"Joelson",
+		"nome":"Ling. Declarativas",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p5",
+		"credito": "4",
+		"professor":"DSCA",
+		"nome":"Empreend.",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p5",
+		"credito": "4",
+		"professor":"Joelson",
+		"nome":"Teoria da Comp",
+		"curso": "si/lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p5",
+		"credito": "4",
+		"professor":"Vanessa",
+		"nome":"Banco de Dados",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p5",
+		"credito": "4",
+		"professor":"Augusto",
+		"nome":"Redes",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p6",
+		"credito": "4",
+		"professor":"Thaíse",
+		"nome":"Sistemas Multimidia.",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p6",
+		"credito": "4",
+		"professor":"Rodrigo Villar",
+		"nome":"Analise e Projeto",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p6",
+		"credito": "4",
+		"professor":"Joseilme",
+		"nome":"Estatistica.",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p7",
+		"credito": "4",
+		"professor":"Flavia",
+		"nome":"EAD.",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p7",
+		"credito": "4",
+		"professor":"Leandro",
+		"nome":"Eng. de Software",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p7",
+		"credito": "4",
+		"professor":"Flavia",
+		"nome":"PMI.",
+		"curso": "lcc"
+		},
+		{
+		"id": "",
+		"periodo": "p7",
+		"credito": "4",
+		"professor":"Thaise",
+		"nome":"ESII.",
+		"curso": "lcc"
+		}
+		
+	]
+}

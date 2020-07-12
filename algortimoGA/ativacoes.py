@@ -55,26 +55,11 @@ def counter(k):
         for n in i[3]:
             d.append(n.horario.id)
     conclusao = Counter(d)
-        
-    #print(conclusao)
     if len(conclusao) != 0:
-        import pdb; pdb.set_trace()
-        print(conclusao)
         for i in conclusao.values():
-            #print(i)
-            if i>1:
-                True
+            if i>2:
+                return True
         return False
-
-"""
- -> verifica se aonde há repetição de horario, a repetição do horario é na mesma
- disciplina:
-  -> Horario Repetido: QUINTA_13H: 2x
-  se for na disciplina de introdução a programação, então é valido
-  pois as duas aulas tem o tempo de inicio 13H e pela duplicação vai até 17H
-"""
-def veryfiyR1(conclusao):
-    pass
 
 def conclusion(disp,lenxc,lenxp):
     dispx = disp.copy()
