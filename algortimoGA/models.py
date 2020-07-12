@@ -14,10 +14,9 @@ class Discipline(object):
     def horarios_disponiveis(self):
         q = " "
         for i in self.list_classes:
-            for k in i.horario:
-                #print(k)
-                q+= k.toString()
-                q+=","
+            
+            q+= i.horario.toString()
+            q+=","
         return q
 
     def toString(self):

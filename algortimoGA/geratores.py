@@ -8,6 +8,7 @@ from random import random as rd
 import random
 from util import RandomHash
 import json
+from collections import Counter
 
 class GEntitys(object):
     def __init__(self,data_set_disciplines,data_set_horarios,data_set_salas):
@@ -85,6 +86,7 @@ tamanho_salas = len(salas)
 
 from copy import deepcopy
 variavel_global = []
+
 class GeradorObject(object):
 
     @staticmethod
@@ -98,63 +100,84 @@ class GeradorObject(object):
                 horarios_antes_da_recriacao.append(aulas.horario.id)
                 horarios_depois_da_recriacao.append(dList[individual[counter]])
         new_disp =[]
-        dt = deepcopy(disciplines)
         #print(horarios_depois_da_recriacao)
+        dt = deepcopy(disciplines)
         for i in range(len(dt)):
             disciplina = Discipline(dt[i].name,dt[i].curso,dt[i].periodo,dt[i].id,
             dt[i].credito,dt[i].professor,[0]*QUANTIDADE_AULAS_POR_DISCIPLINA)
             new_disp.append(disciplina)
         fragments_new_recriacao = GeradorObject.unzipy(QUANTIDADE_AULAS_POR_DISCIPLINA,individual)
-        counter=0
+        
         variavel_global.clear()
-        while counter < len(new_disp):
-            GeradorObject.activateRecreate(counter,len(new_disp),new_disp,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA)
-            #print(variavel_global[counter].list_classes[0].horario.id,variavel_global[counter].list_classes[1].horario.id)
-            counter+=1
-            if counter == len(new_disp):
-                return variavel_global
- 
+        counter=0
+        #print(horarios_depois_da_recriacao)
+        GeradorObject.activateRecreate(0,len(new_disp),deepcopy(new_disp),salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA)
+        #print()
+        count=0
+        for i in variavel_global:
+            for d in range(QUANTIDADE_AULAS_POR_DISCIPLINA):
+                h = Horario(dList[i.list_classes[d]],0,0)
+                sala = Classes(RandomHash.gerator_id(),RandomHash.gerator_id(),60)
+                sala.horario = h
+                i.list_classes[d] = sala
+            count+=1
+        
+        return variavel_global
     @staticmethod
     def activateRecreate(counter,total,new_disp,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA):
         if counter < total:
             f = GeradorObject.getDiscipline(new_disp,counter,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA)
-            #print(f.list_classes[0].horario.id,f.list_classes[1].horario.id)
             variavel_global.append(f)
-            # desativei a recursividade e coloquei uma variavel global
-            #GeradorObject.activateRecreate(counter,total,new_disp,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA)
+            GeradorObject.activateRecreate(counter+1,total,new_disp,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA)
         else:
-            return True
-    
+            for i in range(len(variavel_global)):
+                GeradorObject.validate(variavel_global,i,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA)
+
+    @staticmethod
+    def validate(disciplineList,index,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA):
+        variavel_global[index].list_classes=None
+        variavel_global[index].list_classes =fragments_new_recriacao[index]
     @staticmethod
     def getDiscipline(new_disp,position,salas,dList,fragments_new_recriacao,QUANTIDADE_AULAS_POR_DISCIPLINA):
-        new_disp[position].list_classes=GeradorObject.recreateClasse(salas,dList,fragments_new_recriacao[position],QUANTIDADE_AULAS_POR_DISCIPLINA)
-        return new_disp[position]    
-                 
+        new_disp[position].list_classes = GeradorObject.recreateClasse(salas,dList,fragments_new_recriacao[position],QUANTIDADE_AULAS_POR_DISCIPLINA,position)
+        return new_disp[position]          
     @staticmethod
     def unzipy(splice,individual):
         q = []
         for i in range(0,len(individual), splice):
             q.append( individual[i:i + splice] )
         return q
-        
     @staticmethod
-    def recreateClasse(salas,dList,horarios_recriados,QUANTIDADE_AULAS_POR_DISCIPLINA):
-        #print("Recriação: ",horario_recriado)
+    def recreatedClasseValidated(salas):
+        aux = random.randint(0,len(salas)-1)
+        sala = (salas[aux])
+        return sala
+    @staticmethod
+    def recreateClasse(salas,dList,horarios_recriados,QUANTIDADE_AULAS_POR_DISCIPLINA,position):
         result=[]
-        for i in range(QUANTIDADE_AULAS_POR_DISCIPLINA):
+        counter=0
+        while counter < QUANTIDADE_AULAS_POR_DISCIPLINA:
             aux = random.randint(0,len(salas)-1)
             sala = (salas[aux])
-            #print(dList[horarios_recriados[i]])
-            sala.horario = Horario(dList[horarios_recriados[i]],0,0)
-            result.append(sala)
+            sala.horario=None
+            sala.horario = Horario(dList[horarios_recriados[counter]],0,0)
+            result.insert(counter,sala)
+            counter+=1
+            sala=None
+            aux=None
+        anomalia = Counter(result)
+        for x in anomalia.values():
+            if x == QUANTIDADE_AULAS_POR_DISCIPLINA:
+                aux = random.randint(0,len(salas)-1)
+                sala = (salas[aux])
+                sala.horario = Horario(dList[horarios_recriados[0]],0,0)
+                result[0] = sala
         
         return result
         
     @staticmethod
     def get_len_horarios_enumeration():
         return len(HorarioE)
-    
-
     @staticmethod
     def get_list_horarios_by_enum():
         aux = list(HorarioE)
@@ -163,25 +186,18 @@ class GeradorObject(object):
             list_horarios.append(horario_enum.name)
         
         return list_horarios
-
     @staticmethod
     def generate_chave_especific(horarios,k,repeticoes):
-        
         f = random.choices(horarios,k=repeticoes)
         horarios_list= []
-        
         for element in k:
             for horario in element[4]:
                 horarios_list.append(horario.codigo)
         
         for i in range(len(f)):
             while f[i].codigo in horarios_list:
-                f = random.choices(horarios,k=repeticoes)
-                
-        
+                f = random.choices(horarios,k=repeticoes)   
         return f
-    
-
     @staticmethod
     def generate_horarios_by_sala_pesos(qnt_aulas_disciplina,pesos,horarios):
         return random.choices(horarios,weights=pesos,k=qnt_aulas_disciplina)

@@ -2,6 +2,11 @@
 # Define as funções de restrições.
 from collections import Counter
 
+
+
+"""
+  -> Disciplinas do mesmo e curso e periodo não podem ter aulas no mesmo horario. 
+"""
 def R1(disciplines,valor_maximo,valor_minimo):
     disp = []
     periodos = []
@@ -53,12 +58,23 @@ def counter(k):
         
     #print(conclusao)
     if len(conclusao) != 0:
-        #print(conclusao)
+        import pdb; pdb.set_trace()
+        print(conclusao)
         for i in conclusao.values():
             #print(i)
-            if i>3:
-                return True
+            if i>1:
+                True
         return False
+
+"""
+ -> verifica se aonde há repetição de horario, a repetição do horario é na mesma
+ disciplina:
+  -> Horario Repetido: QUINTA_13H: 2x
+  se for na disciplina de introdução a programação, então é valido
+  pois as duas aulas tem o tempo de inicio 13H e pela duplicação vai até 17H
+"""
+def veryfiyR1(conclusao):
+    pass
 
 def conclusion(disp,lenxc,lenxp):
     dispx = disp.copy()
@@ -71,13 +87,13 @@ def conclusion(disp,lenxc,lenxp):
                 #print(k)
                 #print()
                 q =counter(k)
-                resposta.append(q)
-    cont=0
-    #print(resposta)
-    for i in range(len(resposta)-1):
-        if resposta[i] != None:
-            cont+=1              
-    counterx = len(resposta) - cont
+                if q == None:
+                    pass
+                else:
+                    resposta.append(q)
+       
+    counterx = len(resposta)
+    #print(counterx)
     #print(resposta)
     if resposta.count(False) == counterx:
             return True

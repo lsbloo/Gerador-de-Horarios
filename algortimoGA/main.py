@@ -27,15 +27,6 @@ toolbox = base.Toolbox()
 # define a função de avaliação com os pesos 1 (solução otima) , 0 (solução pessima)
 creator.create("Fitness", base.Fitness, weights=(1.0,))
 
-def generate_individual():
-    individual = []
-    for disciplina in disciplines:
-        for aulas in disciplina.list_classes:
-            individual.append([aulas.id, random.randint(0,1)])
-    print(len(individual))
-
-    return individual
-
 
 # define a criação do individuo passando passando a função fitness e os pesos base e o tipo
 # de representação do individuo que neste caso é um array 
@@ -59,13 +50,12 @@ toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 def fitness_function(individual):
     #print(individual)
     dList = GeradorObject.get_list_horarios_by_enum()
-    
+    # recria as disciplinas de acordo com a representação de horarios do individuo
     disp = GeradorObject.recreateDisciplines(disciplines,dList,individual,QUANTIDADE_AULAS_POR_DISCIPLINA)
-    #print()
-    print(disp[0].list_classes[0].horario.id, disp[0].list_classes[1].horario.id)
-
+    #print(disp[0].list_classes[0].horario.id,disp[0].list_classes[1].horario.id)
+    #print(disp[0].list_classes[0].horario.id)
     #ativacoes = lista_ativacoes
-    result = R1(disciplines,100,10)
+    result = R1(disp,100,10)
     #import pdb; pdb.set_trace()
     #print()
     return  result / 1000,0
@@ -73,17 +63,14 @@ def fitness_function(individual):
 # registra a função de ativação
 toolbox.register("evaluate", fitness_function)
 
-def crossOverIndividual(ind1,ind2):
-    size = min(len(ind1), len(ind2))
-    cxpoint = random.randint(1, size - 1)
-    ind1[cxpoint:], ind2[cxpoint:] = ind2[cxpoint:], ind1[cxpoint:]
-    return ind1,ind2
 
 # realiza o processo de cross over de 1 ponto
 toolbox.register("mate", tools.cxOnePoint)
 
 # função de mutação;
-toolbox.register("mutate",tools.mutFlipBit, indpb=0.04)
+toolbox.register("mutate",tools.mutUniformInt,low=0,up=GeradorObject.get_len_horarios_enumeration()-1,indpb=0.10)
+
+#toolbox.register("mutate",tools.mutFlipBit,indpb=0.10)
 
 # seleciona o melhor individuo da geração pelo metodo da roleta
 # individuo com maior nota tem maior probabilidade de ser escolhido
@@ -105,9 +92,30 @@ populacao, info = algorithms.eaSimple(populacao,toolbox,
                     probabilidade_crossver,probabilidade_mutacao,
                     numero_geracoes,estatisticas)
 
-melhores = tools.selBest(populacao,1)
 
-#valores_grafico = info.select("max")
-#plt.plot(valores_grafico)
-#plt.title('Acompanhamento dos valores')
-#plt.show()
+melhor = tools.selBest(populacao,1)
+
+"""
+valores_grafico = info.select("max")
+plt.plot(valores_grafico)
+plt.title('Acompanhamento dos valores')
+plt.show()
+"""
+
+
+print(melhor[0])
+"""
+print()
+dList = GeradorObject.get_list_horarios_by_enum()
+melhor = GeradorObject.recreateDisciplines(disciplines,dList,melhor[0],QUANTIDADE_AULAS_POR_DISCIPLINA)
+
+lcc_list = []
+
+for i in melhor:
+    if i.curso == "lcc":
+        lcc_list.append(i)
+s = lcc_list
+lcc_list = sorted(s,key=lambda discipline: discipline.periodo, reverse=True)
+for d in lcc_list:
+    print(d.toString())
+"""
