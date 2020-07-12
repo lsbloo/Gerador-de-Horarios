@@ -47,7 +47,7 @@ toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
 
 def fitness_function(individual):
-    #print(individual)
+    print(individual)
     dList = GeradorObject.get_list_horarios_by_enum()
     # recria as disciplinas de acordo com a representação de horarios do individuo
     disp = GeradorObject.recreateDisciplines(disciplines,dList,individual,QUANTIDADE_AULAS_POR_DISCIPLINA)
@@ -76,10 +76,10 @@ toolbox.register("mutate",tools.mutUniformInt,low=0,up=GeradorObject.get_len_hor
 toolbox.register("select", tools.selRoulette)
 
 
-populacao = toolbox.population(n=100)
+populacao = toolbox.population(n=1)
 probabilidade_crossver = 1.0
 probabilidade_mutacao = 0.10
-numero_geracoes=200
+numero_geracoes=0
 
 estatisticas = tools.Statistics(key=lambda individuo: individuo.fitness.values)
 estatisticas.register("max", numpy.max)
