@@ -56,6 +56,7 @@ def counter(k):
             d.append(n.horario.id)
     conclusao = Counter(d)
     if len(conclusao) != 0:
+        print(conclusao)
         for i in conclusao.values():
             if i>2:
                 return True
