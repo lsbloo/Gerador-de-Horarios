@@ -10,7 +10,7 @@ from datetime import date
 import cherrypy
 import pandas as pd
 from .settings.setting_socket import SERVER_PORT,SERVER_HOST,SERVER_DIRECTORY_SAVE
-
+from threading import Thread
 
 
 
@@ -23,6 +23,23 @@ archive_json_disciplines='disciplines.txt'
 archive_json_horarios='horarios.txt'
 archive_json_sala='salas.txt'
 
+if SERVER_DIRECTORY_SAVE != FAIL_PATH_DIR:
+    print("alouuu")
+    dirx = SERVER_DIRECTORY_SAVE+folder_input
+    archives = [archive_json_disciplines,archive_json_horarios,archive_json_sala]
+    for i in range(3):
+        file = open(dirx+archives[i],"w")
+        file.write('')
+        file.close()
+
+
+class ThreadService(Thread):
+    def __init__(self,pool,start_service,filex):
+        super(ThreadService, self).__init__()
+        self.pool=pool
+    
+    def run(self):
+        self.pool.map(start_service,filex)
 
 
 class MyProcessor(object):         
@@ -98,10 +115,12 @@ class KitKatWebService(object):
    @cherrypy.tools.json_in()
    def discipline(self):
        data = cherrypy.request.json
+       
        if len(data) == 0:
            cherrypy.response.status = "404 NOT FOUND"
            cherrypy.response.header_list = [("Content-Type", 'application/json'),("Server", "KitKatWebService"),("Content-Length", "0"),]
            cherrypy.response.body = {"error" :'Nenhuma informação sobre disciplinas encontradas'}
+           
            return cherrypy.response.body
        else:
            cherrypy.response.status = "200 OK"

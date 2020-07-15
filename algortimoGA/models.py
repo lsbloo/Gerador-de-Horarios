@@ -10,7 +10,8 @@ class Discipline(object):
         ### Lista da Grade Aulas em uma disciplina. GENOMA
         self.list_classes=list_classes
     
-
+    def get(self):
+        return {"id": self.id, "periodo": self.periodo, "credito": self.credito, "professor": self.professor, "nome": self.name, "curso": self.curso}
     def horarios_disponiveis(self):
         q = " "
         for i in self.list_classes:
@@ -42,6 +43,9 @@ class Classes(object):
         self.id=idx
         self.horario = 0
     
+    def get(self):
+        return {"id": self.id, "codigo": self.codigo, "capacidade": self.capacidade}
+
     def set_horario(self,horario):
         self.horario=horario
     
@@ -61,6 +65,18 @@ class Horario(object):
         self.codigo=codigo
         self.sequencia = sequencia
     
+    def get(self):
+        return {"id": self.id, "codigo": self.codigo, "sequencia": self.sequencia}
+    
     def toString(self):
         return "\n Dia: {id} : codigo: {codigo} : sequencia: {sequencia}".format(id=self.id,codigo=self.codigo,sequencia=self.sequencia)
-        
+
+
+
+class ModelList(object):
+    def __init__(self,modelList,name):
+        self.name=name
+        self.modelList=modelList       
+    
+    def __dict__(self):
+        return {"disciplines": self.modelList}

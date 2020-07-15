@@ -24,9 +24,9 @@ class GeradorDataSet(object):
         if self.directory_reader != None:
             with open(self.directory_reader+ARCHIVE_JSON_DISCIPLINES,'r') as outfile:
                 data_set = json.load(outfile)
-            
             if data_set!=None:
-                return data_set.get('disciplines')
+                
+                return data_set
             else:
                 return None
         return None
@@ -37,7 +37,7 @@ class GeradorDataSet(object):
                 data_set = json.load(outfile)
             
             if data_set!=None:
-                return data_set.get('horarios')
+                return data_set
             else:
                 return None
         return None
@@ -48,7 +48,7 @@ class GeradorDataSet(object):
                 data_set = json.load(outfile)
             
             if data_set!=None:
-                return data_set.get('salas')
+                return data_set
             else:
                 return None
         return None
