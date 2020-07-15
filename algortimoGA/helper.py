@@ -4,7 +4,7 @@ def helpy():
     print('Aqui segue as informações detalhadas sobre cada comando da ferramenta.')
     print()
     print('Comando 0: python3 initserver.py ')
-    print("            -> Inicia o servidor da aplicação, aconselhavel rodar em um bash diferente, o servidor é necessario para importação dos arquivos.")
+    print("            -> Inicia o servidor da aplicação em modo escuta, aconselhavel rodar em um bash diferente, o servidor é necessario para importação dos arquivos.")
     print()
     print('Comando 1: python3 main.py import disciplines.csv horarios.csv salas.csv')
     print("           -> Realiza a importação dos arquivos listados acima, defina a variavel de ambiente SERVER_SAVE_DIRECTORY de diretorio padrão e coloque seus arquivos lá, de acordo com os seus respectivos nomes e sequência")
