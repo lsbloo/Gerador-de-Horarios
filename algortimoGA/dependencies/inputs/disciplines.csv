@@ -1,0 +1,51 @@
+id,periodo,credito,professor,nome,curso
+8103104,p1,4,Ayla,Introdução à Programação TUR 1,si/lcc
+8103104,p1,4,Ana Liz,Introdução à Programação TUR 2,si/lcc
+8103106,p1,4,Ana Liz,Introdução ao Computador,si
+8101306,p1,4,Substituto,Metodologia Científica,si
+8108108,p1,4,Eliane,Administração I,si
+8103108,p1,4,Laudelino,Matemática Elementar,si
+8103141,p3,4,Wagner,Alg. e Estrutura de Dados 1,si
+8103138,p3,4,Raquel,Prog. Orientada a Objetos - POO,si
+8103144,p3,4,Wendell,Álgebra Linear e Geom. Analitica,si/lcc
+8103148,p5,4,Leandro,Banco de Dados I,si
+8103155,p5,4,Juliana/Yuska,Eng. de Software Aplicada,si
+8103215,p5,4,Raquel,Sistemas Operacionais,si
+8103152,p5,4,Hacks,Redes de Computadores,si
+8103145,p5,4,Adson,Pesquisa Aplicada SI,si
+8103218,p7,4,Leandro,Desenv. de Sist. Corporativos,si
+8103220,p7,4,Yuska,Gestão da Qualidade SW,si
+8103161,p7,4,Marcus,Sistemas Distribuídos,si
+8103209,p7,4,Hacks,Auditoria e Seg. de Sistemas,si
+8103160,p7,4,Luiz,Sistemas de Apoio a Gestão,si
+8103157,p7,4,Marcus,Intelig. Artificial e Sistemas Espec.,si/lcc
+1,p1,4,Vanessa/Rafael,IP,lcc
+2,p1,4,Thaise,Metodologia,lcc
+3,p1,4,Laudelino,Mat. Elementar,lcc
+4,p1,4,Josevandro,Calculo 1,lcc
+5,p1,4,Int. Comp,Scaico,lcc
+6,p2,4,Ayla,Ling. Programação,lcc
+7,p2,4,Augusto,Arquitetura I,lcc
+8,p2,4,Wendhel,Vetorial,lcc
+9,p2,4,Josevandro,Cálculo II,lcc
+10,p3,4,Wagner,Estr. de Dados,lcc
+11,p3,4,Rafael,Arquitetura II,lcc
+12,p3,4,Substituto,Lógica,lcc
+13,p3,4,Wendhel,Álgebra Linear,lcc
+14,p3,4,Rodrigo Vilar,POO,lcc
+15,p4,4,Pasqueline,Mod. de dados,lcc
+16,p4,4,Raquel,SO,lcc
+17,p4,4,Pasqueline,Mod. de dados,lcc
+18,p4,4,Pasqueline,Pesquisa Aplicada,lcc
+19,p4,4,Joelson,Ling. Declarativas,lcc
+20,p5,4,DSCA,Empreend.,lcc
+21,p5,4,Joelson,Teoria da Comp.,lcc
+22,p5,4,Vanessa,Banco de Dados,lcc
+23,p5,4,Augusto,Redes,lcc
+24,p6,4,Thaise,Sistemas Multimídia,lcc
+25,p6,4,Rodrigo Vilar,Análise e Projeto,lcc
+26,p6,4,Joseilme,Estatística,lcc
+27,p7,4,Flávia,EAD,lcc
+28,p7,4,Leandro,Eng. de Software,lcc
+29,p7,4,Flávia,PMI,lcc
+31,p7,4,Thaise,ESII,lcc

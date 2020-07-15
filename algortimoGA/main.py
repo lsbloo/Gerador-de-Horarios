@@ -17,6 +17,10 @@ import time
 from helper import helpy
 from readercsv import ImportCsv
 from geratores import GeradorObject
+from doenv import loadenv
+
+loadenv()
+
 
 disciplina = "disciplines.csv"
 horario = "horarios.csv"
