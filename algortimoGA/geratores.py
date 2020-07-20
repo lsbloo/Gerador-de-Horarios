@@ -98,6 +98,8 @@ class GeradorObject(object):
         contém duas aulas se a variavel QUANTIDADE_AULAS_POR_DISCIPLINA FOR IGUAL = 2
         desta forma, o indice zero do sub-pacote de horarios corresponde a o indice 0 da disciplina em questão,
         os elementos do sub pacote são os indices da minha enumeration de horarios, no qual é feito uma troca.
+
+        Esta operação de troca de horarios denominados aqui de gene é feita recursivamente até que a condição de parada seja satisfeita.
     """
     @staticmethod
     def recreateDisciplines(disciplines, dList, individual,QUANTIDADE_AULAS_POR_DISCIPLINA):
