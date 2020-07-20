@@ -7,7 +7,7 @@ from collections import Counter
 """
   -> Disciplinas do mesmo e curso e periodo não podem ter aulas no mesmo horario. 
 """
-def R1(disciplines,valor_maximo,valor_minimo):
+def R1(disciplines):
     disp = []
     periodos = []
     curso = []
@@ -19,10 +19,10 @@ def R1(disciplines,valor_maximo,valor_minimo):
 
     list_periodos = list(set(periodos))
     list_cursos = list(set(curso))
-    d = conclusion(disp,list_periodos,list_cursos)
-    if d == True:
-        return valor_maximo
-    return valor_minimo
+    violations = conclusion(disp,list_periodos,list_cursos)
+    if violations == 0:
+        return {"violations": 0}
+    return {"violations": violations}
 
 
 def search(dispx,periodo,lenxc,limitador=0):
@@ -56,9 +56,8 @@ def counter(k):
             d.append(n.horario.id)
     conclusao = Counter(d)
     if len(conclusao) != 0:
-        #print(conclusao)
         for i in conclusao.values():
-            if i>2:
+            if i>=2:
                 return True
         return False
 
@@ -69,9 +68,6 @@ def conclusion(disp,lenxc,lenxp):
        pacote = getter_search(dispx,lenxp,lenxc,i)
        for k in pacote:
             if k != None or len(k) != 0:
-                #print()
-                #print(k)
-                #print()
                 q =counter(k)
                 if q == None:
                     pass
@@ -79,9 +75,5 @@ def conclusion(disp,lenxc,lenxp):
                     resposta.append(q)
        
     counterx = len(resposta)
-    #print(counterx)
-    #print(resposta)
-    if resposta.count(False) == counterx:
-            return True
-    else:
-        return False
+    violations = resposta.count(True)
+    return violations

@@ -89,6 +89,16 @@ variavel_global = []
 
 class GeradorObject(object):
 
+    """
+        Realiza o processo de recriação das disciplinas de acordo com o array de individuos.(solução)
+        esta função recupera o array de individuos e o desfragmenta em sub-pacotes de horarios.
+        Utiliza metodos auxiliares para fazer a recriação dos horarios e atribui-los novamente
+        em uma disciplina especificada aqui pelo indice. Exemplo:
+        Disciplina[Introdução a programação] indice = 0 List Disciplines
+        contém duas aulas se a variavel QUANTIDADE_AULAS_POR_DISCIPLINA FOR IGUAL = 2
+        desta forma, o indice zero do sub-pacote de horarios corresponde a o indice 0 da disciplina em questão,
+        os elementos do sub pacote são os indices da minha enumeration de horarios, no qual é feito uma troca.
+    """
     @staticmethod
     def recreateDisciplines(disciplines, dList, individual,QUANTIDADE_AULAS_POR_DISCIPLINA):
         horarios_depois_da_recriacao = []

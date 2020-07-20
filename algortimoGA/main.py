@@ -35,16 +35,16 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
     
     QUANTIDADE_AULAS = QUANTIDADE_DISCIPLINAS * QUANTIDADE_AULAS_POR_DISCIPLINA
 
-
+    pesos = (-1.0,)
 
     toolbox = base.Toolbox()
     # define a função de avaliação com os pesos 1 (solução otima) , 0 (solução pessima)
-    creator.create("Fitness", base.Fitness, weights=(1.0,))
+    creator.create("FitnessMin", base.Fitness, weights=pesos)
 
 
     # define a criação do individuo passando passando a função fitness e os pesos base e o tipo
     # de representação do individuo que neste caso é um array 
-    creator.create("Individual", list, fitness=creator.Fitness)
+    creator.create("Individual", list, fitness=creator.FitnessMin)
     # define o array do individuo com valores aleatorios
     # 
 
@@ -59,18 +59,20 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
 
-
-
     def fitness_function(individual):
-        
         dList = GeradorObject.get_list_horarios_by_enum()
         # recria as disciplinas de acordo com a representação de horarios do individuo
         disp = GeradorObject.recreateDisciplines(disciplines,dList,individual,QUANTIDADE_AULAS_POR_DISCIPLINA)
+        ativacoes =[]
+        ativacoes.append(R1(disp))
         
-        result = R1(disp,100,10)
+        valuesx = []
+        for i in range(len(ativacoes)):
+            valuesx.append(ativacoes[i].get('violations'))
         
-        return  result / 1000,0
-
+        return valuesx
+        
+    
     # registra a função de ativação
     toolbox.register("evaluate", fitness_function)
 
@@ -85,10 +87,20 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
     toolbox.register("mutate",tools.mutUniformInt,low=0,up=GeradorObject.get_len_horarios_enumeration()-1,indpb=0.10)
 
 
+    """
+        Aplica a seleção por Torneio e utiliza do elitismo para preservar
+        os melhores individuos das gerações, a ideia é transferir os melhores 
+        individuos para geração atual garantindo uma qualidade na solução.
 
-    # seleciona o melhor individuo da geração pelo metodo da roleta
-    # individuo com maior nota tem maior probabilidade de ser escolhido
-    toolbox.register("select", tools.selRoulette)
+        preserva apenas 10% da solução, e os outros 90% dos individuos
+        são selecionados pelo metodo da roleta.
+    """
+    def selElitistAndTournament(individuals, k, frac_elitist, tournsize):
+        return tools.selBest(individuals, int(k*frac_elitist)) + tools.selTournament(individuals, int(k*(1-frac_elitist)), tournsize=tournsize)
+
+    
+    
+    toolbox.register("select", selElitistAndTournament, frac_elitist=0.1 , tournsize=3)
 
 
     populacao = toolbox.population(n=populacao)
@@ -97,10 +109,10 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
     num_geracoes=numero_geracoes
 
     estatisticas = tools.Statistics(key=lambda individuo: individuo.fitness.values)
+    estatisticas.register("avg", numpy.mean)
+    estatisticas.register("std", numpy.std)
+    estatisticas.register("min", numpy.min)
     estatisticas.register("max", numpy.max)
-    estatisticas.register("avg", numpy.mean, axis=0)
-    estatisticas.register("std", numpy.std, axis=0)
-    estatisticas.register("min", numpy.min, axis=0)
 
     populacao, info = algorithms.eaSimple(populacao,toolbox,
                         probabilidade_crossver,probabilidade_mutacao,
@@ -108,16 +120,17 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
 
 
     melhor = tools.selBest(populacao,1)
-
-    """
-    valores_grafico = info.select("max")
+    #print(melhor[0].fitness.values)
+    
+    valores_grafico = info.select("min")
     plt.plot(valores_grafico)
     plt.title('Acompanhamento dos valores')
     plt.show()
 
 
-    print(melhor[0])
+    #print(melhor[0])
 
+    """
     print()
     dList = GeradorObject.get_list_horarios_by_enum()
     melhor = GeradorObject.recreateDisciplines(disciplines,dList,melhor[0],QUANTIDADE_AULAS_POR_DISCIPLINA)
@@ -131,8 +144,8 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
     lcc_list = sorted(s,key=lambda discipline: discipline.periodo, reverse=True)
     for d in lcc_list:
         print(d.toString())
-
     """
+    
 
 def main():
     args=[]
