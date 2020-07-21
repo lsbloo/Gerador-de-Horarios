@@ -140,8 +140,8 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
             si_list.append(i)
     s = lcc_list
     l = si_list
-    lcc_list = sorted(s,key=lambda discipline: discipline.periodo, reverse=True)
-    si_list = sorted(l,key= lambda discipline: discipline.periodo, reverse=True)
+    lcc_list = sorted(s,key=lambda discipline: discipline.periodo, reverse=False)
+    si_list = sorted(l,key= lambda discipline: discipline.periodo, reverse=False)
 
     exportador = Export(SERVER_DIRECTORY_SAVE)
     
