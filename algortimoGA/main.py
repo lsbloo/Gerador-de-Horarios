@@ -1,4 +1,4 @@
-from settings_global.setting_global import SERVER_PORT,SERVER_HOST,URL_HORARIO,URL_DISCIPLINA,URL_SALA
+from settings_global.setting_global import SERVER_PORT,SERVER_HOST,URL_HORARIO,URL_DISCIPLINA,URL_SALA,SERVER_DIRECTORY_SAVE
 import subprocess
 import os
 import random
@@ -18,6 +18,10 @@ from helper import helpy
 from readercsv import ImportCsv
 from geratores import GeradorObject
 from doenv import loadenv
+from exports.exports import Export
+import figlet
+
+
 
 loadenv()
 
@@ -120,31 +124,32 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
 
 
     melhor = tools.selBest(populacao,1)
-    #print(melhor[0].fitness.values)
     
     valores_grafico = info.select("min")
     plt.plot(valores_grafico)
     plt.title('Acompanhamento dos valores')
-    plt.show()
-
-
-    #print(melhor[0])
-
-    """
     print()
     dList = GeradorObject.get_list_horarios_by_enum()
     melhor = GeradorObject.recreateDisciplines(disciplines,dList,melhor[0],QUANTIDADE_AULAS_POR_DISCIPLINA)
-
     lcc_list = []
-
+    si_list = []
     for i in melhor:
         if i.curso == "lcc":
             lcc_list.append(i)
+        else:
+            si_list.append(i)
     s = lcc_list
+    l = si_list
     lcc_list = sorted(s,key=lambda discipline: discipline.periodo, reverse=True)
-    for d in lcc_list:
-        print(d.toString())
-    """
+    si_list = sorted(l,key= lambda discipline: discipline.periodo, reverse=True)
+
+    exportador = Export(SERVER_DIRECTORY_SAVE)
+    
+    exportador.export_csv_by_type("si", si_list) 
+    exportador.export_csv_by_type("lcc", lcc_list)
+    exportador.export_graphic(plt)
+    print()
+    print("Melhores resultados enviados para: "+SERVER_DIRECTORY_SAVE+"folders_kitkat/exports !")
     
 
 def main():

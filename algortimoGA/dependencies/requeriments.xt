@@ -42,4 +42,5 @@ websocket==0.2.1
 websocket-client==0.57.0
 httputil==0.6.7
 python-dotenv==0.14.0
-pickle5 == 0.0.11 
+pickle5 == 0.0.11
+pyfiglet==0.7 
