@@ -29,12 +29,13 @@ class ImportCsv(object):
                 else:
                     split = coluna[5].split("/")
                     if len(split)>1: #name,curso,periodo,id,credito,professor,list_classes
-                        disp1 = Discipline(coluna[4],split[0],coluna[1],coluna[0],coluna[2],coluna[4],None)
-                        disp2 = Discipline(coluna[4],split[1],coluna[1],coluna[0],coluna[2],coluna[4],None)
+                        disp1 = Discipline(coluna[4],split[0],coluna[1],coluna[0],coluna[2],coluna[3],None)
+                        #print(disp1.name,disp1.curso,disp1.periodo,disp1.credito,disp1.professor)
+                        disp2 = Discipline(coluna[4],split[1],coluna[1],coluna[0],coluna[2],coluna[3],None)
                         list_disciplinas.append(disp1)
                         list_disciplinas.append(disp2)
                     else:
-                        disp1 = Discipline(coluna[4],coluna[5],coluna[1],coluna[0],coluna[2],coluna[4],None)
+                        disp1 = Discipline(coluna[4],coluna[5],coluna[1],coluna[0],coluna[2],coluna[3],None)
                         list_disciplinas.append(disp1)
             return list_disciplinas
     def readerSala(self,name):

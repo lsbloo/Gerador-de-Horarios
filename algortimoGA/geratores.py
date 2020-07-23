@@ -9,12 +9,19 @@ import random
 from util import RandomHash
 import json
 from collections import Counter
-
+from helper import helpy
 class GEntitys(object):
     def __init__(self,data_set_disciplines,data_set_horarios,data_set_salas):
-        self.data_set_disciplines=data_set_disciplines
-        self.data_set_horarios=data_set_horarios
-        self.data_set_salas=data_set_salas
+        if data_set_disciplines != None and data_set_horarios != None and data_set_salas != None:
+            self.data_set_disciplines=data_set_disciplines
+            self.data_set_horarios=data_set_horarios
+            self.data_set_salas=data_set_salas
+        else:
+            print()
+            print('Realize a importação dos arquivos')
+            print()
+            helpy()
+            quit()
     
     def splitter(self,curso):
         q = curso.split("/")
@@ -133,6 +140,7 @@ class GeradorObject(object):
                 sala.horario = h
                 i.list_classes[d] = sala
             count+=1
+        
         
         return variavel_global
     @staticmethod

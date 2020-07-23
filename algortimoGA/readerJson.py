@@ -23,9 +23,12 @@ class GeradorDataSet(object):
     def get_data_disciplines(self):
         if self.directory_reader != None:
             with open(self.directory_reader+ARCHIVE_JSON_DISCIPLINES,'r') as outfile:
-                data_set = json.load(outfile)
+                state = os.stat(self.directory_reader+ARCHIVE_JSON_DISCIPLINES)
+                if state.st_size == 0:
+                    return None
+                else:
+                    data_set = json.load(outfile)
             if data_set!=None:
-                
                 return data_set
             else:
                 return None
@@ -34,7 +37,11 @@ class GeradorDataSet(object):
     def get_data_horarios(self):
         if self.directory_reader != None:
             with open(self.directory_reader+ARCHIVE_JSON_HORARIOS,'r') as outfile:
-                data_set = json.load(outfile)
+                state = os.stat(self.directory_reader+ARCHIVE_JSON_HORARIOS)
+                if state.st_size == 0:
+                    return None
+                else:
+                    data_set = json.load(outfile)
             
             if data_set!=None:
                 return data_set
@@ -45,7 +52,11 @@ class GeradorDataSet(object):
     def get_data_salas(self):
         if self.directory_reader != None:
             with open(self.directory_reader+ARCHIVE_JSON_SALAS,'r') as outfile:
-                data_set = json.load(outfile)
+                state = os.stat(self.directory_reader+ARCHIVE_JSON_SALAS)
+                if state.st_size == 0:
+                    return None
+                else:
+                    data_set = json.load(outfile)
             
             if data_set!=None:
                 return data_set

@@ -20,17 +20,25 @@ class Export(object):
         if path.exists(self.pathx+folder_input+CONST_EXPORT):
             return True
         return False
-    """
-    exporta 
-    """
+  
     def export_csv_by_type(self,typex,dataset):
         with open(self.pathx+folder_input+CONST_EXPORT+"/"+typex+"-t1"+".csv", mode="w") as export_file:
             export_file_writer = csv.writer(export_file,delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL)
             export_file_writer.writerow(["nome","curso","periodo","horario1", "horario2"])
             for disciplina in dataset:
                 export_file_writer.writerow([disciplina.name,disciplina.curso,disciplina.periodo,disciplina.list_classes[0].horario.id,disciplina.list_classes[1].horario.id])
-
+        export_file.close()
     def export_graphic(self,graphic):
         graphic.savefig(self.pathx+folder_input+CONST_EXPORT+"/"+"graphic_best")
+
+    def export_time_process(self,num_individual,num_geracao,taxa_mutacao,cruzamento,time_minutos):
+        
+        with open(self.pathx+folder_input+CONST_EXPORT+"/time_execution.txt", mode="w") as outfile:
+            outfile.write("Quantidade De Individuos: %d "%(num_individual))
+            outfile.write("\nQuantidade De Gerações:%d "%(num_geracao))
+            outfile.write("\nTaxa De Mutação:%0.2f"%(taxa_mutacao))
+            outfile.write("\nCruzamento: %s "%(cruzamento))
+            outfile.write("\nTempo de Execução (Minutos): %d "%(time_minutos))
+        outfile.close()
 
     
