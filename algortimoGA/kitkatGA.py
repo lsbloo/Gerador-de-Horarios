@@ -62,7 +62,7 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
         for i in range(len(ativacoes)):
             valuesx.append(ativacoes[i].get('violations'))
         
-        
+        print(valuesx)
         return valuesx
         
     
@@ -133,6 +133,7 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
     lcc_list = sorted(s,key=lambda discipline: discipline.periodo, reverse=False)
     si_list = sorted(l,key= lambda discipline: discipline.periodo, reverse=False)
 
+    
 
     temp2 = time.time() - t2
     minutos = temp2/60
