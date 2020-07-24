@@ -27,11 +27,11 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
     
     QUANTIDADE_AULAS = QUANTIDADE_DISCIPLINAS * QUANTIDADE_AULAS_POR_DISCIPLINA
 
-    pesos = (-1.0,-0.10)
+    pesos = [1000,1]
 
     toolbox = base.Toolbox()
     # define a função de avaliação com os pesos 1 (solução otima) , 0 (solução pessima)
-    creator.create("FitnessMin", base.Fitness, weights=pesos)
+    creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
 
 
     # define a criação do individuo passando passando a função fitness e os pesos base e o tipo
@@ -58,12 +58,12 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
         ativacoes.append(R1(disp))
         ativacoes.append(R2(disp))
 
-        valuesx = []
+        result = 0
         for i in range(len(ativacoes)):
-            valuesx.append(ativacoes[i].get('violations'))
+            result += ativacoes[i].get('violations') * pesos[i]
         
-        print(valuesx)
-        return valuesx
+        
+        return result,
         
     
     # registra a função de ativação
