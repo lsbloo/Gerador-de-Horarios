@@ -37,6 +37,7 @@ class ImportCsv(object):
                     else:
                         disp1 = Discipline(coluna[4],coluna[5],coluna[1],coluna[0],coluna[2],coluna[3],None)
                         list_disciplinas.append(disp1)
+            
             return list_disciplinas
     def readerSala(self,name):
         self.path = SERVER_DIRECTORY_SAVE+"/"+name

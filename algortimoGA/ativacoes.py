@@ -135,7 +135,33 @@ def get_violations_R2(disp,list_professores):
     return total_violation
 ###################################################################################################################
     
+"""
+    Para avaliar o cromossomo é levado em consideração o seguinte: 
+    a mesma disciplina não pode ter aula no mesmo dia
+"""
+def R3(disciplines):
+    l = set(disciplines)
+    disp=[]
+    for i in l:
+        disp.append([i.name,i.professor,i.list_classes])
+    violation = counter_disp_horarios_equals(disp)
+    if violation == 0:
+        return {"violations": 0}
+    return {"violations": violation}
 
-           
+
+def counter_disp_horarios_equals(disp):
+    violation=0
+    for i in range(len(disp)):
+        aulas=[]
+        for horario_index in range(len(disp[i][2])):
+            aulas.append(disp[i][2][horario_index].horario.id)
+            counter = Counter(aulas)
+            for values in counter.values():
+                if values>=2:
+                    violation+=1
+    return violation
+
+
         
 
