@@ -10,6 +10,7 @@ from util import RandomHash
 import json
 from collections import Counter
 from helper import helpy
+
 class GEntitys(object):
     def __init__(self,data_set_disciplines,data_set_horarios,data_set_salas):
         if data_set_disciplines != None and data_set_horarios != None and data_set_salas != None:
@@ -18,9 +19,9 @@ class GEntitys(object):
             self.data_set_salas=data_set_salas
         else:
             print()
+            print('Arquivos de entrada nulos')
             print('Realize a importação dos arquivos')
             print()
-            helpy()
             quit()
     
     def splitter(self,curso):
@@ -98,7 +99,7 @@ class GeradorObject(object):
 
     """
         Realiza o processo de recriação das disciplinas de acordo com o array de individuos.(solução)
-        esta função recupera o array de individuos e o desfragmenta em sub-pacotes de horarios.
+        esta função recupera o array de individuos e o fragmenta em sub-pacotes de horarios.
         Utiliza metodos auxiliares para fazer a recriação dos horarios e atribui-los novamente
         em uma disciplina especificada aqui pelo indice. Exemplo:
         Disciplina[Introdução a programação] indice = 0 List Disciplines

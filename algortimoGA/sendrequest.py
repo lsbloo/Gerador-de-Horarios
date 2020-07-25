@@ -8,10 +8,7 @@ class SenderRequest(object):
     def decode(self,dump):
         return dump.decode("UTF-8")
     def senderHorarios(self,url,json_data):
-        
-
         resp = requests.post(url,data=json.dumps(json_data,ensure_ascii=False).encode("UTF-8"),
-        
         headers={'Content-Type': 'application/json'})
         if resp.status_code == 200:
             print('Horarios inseridos com sucesso')

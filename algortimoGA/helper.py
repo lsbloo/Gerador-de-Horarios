@@ -13,7 +13,7 @@ def helpy():
     print('Comando 2: python3 main.py -i 100 -g 500 -m 0.10 -c 2')
     print("           -> Executa o algoritmo genético, é necessario importar os arquivos e carregar as configurações")
     print("           -> Configurações: (i = Número de individuos,g = Número de gerações,m = taxa de mutação,c = cruzamento)")
-    print("           -> Ao final da execução será exportado o melhor quadro gerado, como também o gráfico de acompanhamento de valores.")
+    print("           -> Ao final da execução será exportado o melhor quadro gerado, como também o gráfico de acompanhamento de valores e um arquivo .txt com informações do tempo de execução dada as configurações.")
     print()
     print()
 
