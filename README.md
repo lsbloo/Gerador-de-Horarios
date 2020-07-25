@@ -5,6 +5,8 @@
 - [Como Compilar]
 - [Como Executar]
 
+https://youtu.be/eut2DwJIDP4
+
 ## Iniciando
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.

@@ -142,8 +142,24 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
         lcc_list = sorted(s,key=lambda discipline: discipline.periodo, reverse=False)
         si_list = sorted(l,key= lambda discipline: discipline.periodo, reverse=False)
 
-        
+        dList = GeradorObject.get_list_horarios_by_enum()
+        ativacoes =[]
+        ativacoes.append(R1(melhor))
+        ativacoes.append(R2(melhor))
+        ativacoes.append(R3(melhor))
+        ativacoes.append(R4(melhor,dList))
 
+        reports=""
+        quantity_violation=0
+        for k in range(len(ativacoes)):
+            if ativacoes[k].get('violations') != 0:
+                reports+=","
+                reports+=str(k)
+                reports+=": violações: "
+                reports+=str(ativacoes[k].get('violations'))
+                quantity_violation+=1
+        
+        
         temp2 = time.time() - t2
         minutos = temp2/60
         exportador = Export(SERVER_DIRECTORY_SAVE)
@@ -152,9 +168,9 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
         exportador.export_csv_by_type("lcc", lcc_list)
         exportador.export_graphic(plt)
         if crossover == 1:
-            exportador.export_time_process(numero_individuos,num_geracoes,taxa_mutacao,"Cruzamento um corte",minutos)
+            exportador.export_time_process(numero_individuos,num_geracoes,taxa_mutacao,"Cruzamento um corte",minutos,quantity_violation,reports)
         else:
-            exportador.export_time_process(numero_individuos,num_geracoes,taxa_mutacao,"Cruzamento dois cortes",minutos)
+            exportador.export_time_process(numero_individuos,num_geracoes,taxa_mutacao,"Cruzamento dois cortes",minutos,quantity_violation,reports)
         print()
         print("Melhores resultados enviados para: "+SERVER_DIRECTORY_SAVE+"folders_kitkat/exports !")
     

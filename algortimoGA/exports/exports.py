@@ -31,7 +31,7 @@ class Export(object):
     def export_graphic(self,graphic):
         graphic.savefig(self.pathx+folder_input+CONST_EXPORT+"/"+"graphic_best")
 
-    def export_time_process(self,num_individual,num_geracao,taxa_mutacao,cruzamento,time_minutos):
+    def export_time_process(self,num_individual,num_geracao,taxa_mutacao,cruzamento,time_minutos,quantity_violations,indices):
         
         with open(self.pathx+folder_input+CONST_EXPORT+"/time_execution.txt", mode="w") as outfile:
             outfile.write("Quantidade De Individuos: %d "%(num_individual))
@@ -39,6 +39,8 @@ class Export(object):
             outfile.write("\nTaxa De Mutação:%0.2f"%(taxa_mutacao))
             outfile.write("\nCruzamento: %s "%(cruzamento))
             outfile.write("\nTempo de Execução (Minutos): %d "%(time_minutos))
+            outfile.write("\nQuantidade de restrições violadas: %d"%(quantity_violations))
+            outfile.write("\nRestrição indices:numero de violações: %s :"%(indices))
         outfile.close()
 
     
