@@ -5,7 +5,7 @@ def helpy():
     print('OBS: No primeiro uso da ferramenta é necessario executar o comando 0 e 1. Uma vez importado os arquivos não sera necessário executar novamente o comando 1, lembre-se de sempre deixar o servidor rodando. ;] ')
     print()
     print('Comando 0: python3 initserver.py ')
-    print("            -> Inicia o servidor da aplicação em modo escuta, aconselhavel rodar em um bash diferente, o servidor é necessario para importação dos arquivos e executação do algoritmo genético.")
+    print("            -> Inicia o servidor da aplicação em modo escuta, aconselhavel rodar em um bash diferente, o servidor é necessario para importação dos arquivos e execução do algoritmo genético.")
     print()
     print('Comando 1: python3 main.py import disciplines.csv horarios.csv salas.csv')
     print("           -> Realiza a importação dos arquivos listados acima, defina a variavel de ambiente SERVER_SAVE_DIRECTORY de diretorio padrão e coloque seus arquivos lá, de acordo com os seus respectivos nomes e sequência")

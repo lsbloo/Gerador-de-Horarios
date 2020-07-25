@@ -12,7 +12,7 @@ from deap import tools
 import matplotlib.pyplot as plt
 import sys
 import time
-from ativacoes import R1,R2,R3
+from ativacoes import R1,R2,R3,R4
 from geratores import GeradorObject
 from exports.exports import Export
 
@@ -27,7 +27,7 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
     
     QUANTIDADE_AULAS = QUANTIDADE_DISCIPLINAS * QUANTIDADE_AULAS_POR_DISCIPLINA
 
-    pesos = [1000,1000,10]
+    pesos = [1000,1000,10,1]
 
     toolbox = base.Toolbox()
     # define a função de avaliação com os pesos 1 (solução otima) , 0 (solução pessima)
@@ -58,6 +58,7 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
         ativacoes.append(R1(disp))
         ativacoes.append(R2(disp))
         ativacoes.append(R3(disp))
+        ativacoes.append(R4(disp,dList))
 
         result = 0
         for i in range(len(ativacoes)):

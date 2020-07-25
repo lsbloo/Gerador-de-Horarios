@@ -163,5 +163,41 @@ def counter_disp_horarios_equals(disp):
     return violation
 
 ###################################################################################################################
-        
+
+
+    
+"""
+    Para avaliar o cromossomo é levado em consideração o seguinte: 
+    disciplinas que tem horario igual as 15H serão penalizadas.
+"""
+def R4(disciplines,dList):
+    l = set(disciplines)
+    disp=[]
+    param= "15H"
+    for i in l:
+        disp.append([i.list_classes])
+    horarios_15H = get_horarios_15H(dList,param)
+    violations = search_ocorrencia_15h(disp,horarios_15H)
+    if violations == 0:
+        return {"violations": 0}
+    return {"violations": violations}
+
+def get_horarios_15H(dList,param):
+    result=[]
+    for horario in dList:
+        if horario.find(param) != -1:
+            result.append(horario)
+    return result
+
+def search_ocorrencia_15h(disp,horarios_15H):
+    violations=0
+    for i in range(len(disp)):
+        for n in range(len(disp[i])):
+            for z in range(len(disp[i][n])):
+                if disp[i][n][z].horario.id in horarios_15H:
+                    violations+=1
+    return violations
+
+###################################################################################################################
+
 
