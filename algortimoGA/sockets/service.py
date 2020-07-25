@@ -24,8 +24,10 @@ archive_json_horarios='horarios.txt'
 archive_json_sala='salas.txt'
 
 if SERVER_DIRECTORY_SAVE != FAIL_PATH_DIR:
-    print("alouuu")
+    print('Arquivos iniciais criados')
     dirx = SERVER_DIRECTORY_SAVE+folder_input
+    if not os.path.exists(dirx):
+        os.mkdir(dirx)  
     archives = [archive_json_disciplines,archive_json_horarios,archive_json_sala]
     for i in range(3):
         file = open(dirx+archives[i],"w")
@@ -181,8 +183,8 @@ class KitKatWebService(object):
  -Init KitKat WebService.
 """
 def quickstart():
-    print(str(SERVER_HOST))
-    print(str(SERVER_PORT))
+    print("Host Configurado: ",str(SERVER_HOST))
+    print("Porta Configurada: ",str(SERVER_PORT))
 
     configuration = {
         "server.socket_host": str(SERVER_HOST), 

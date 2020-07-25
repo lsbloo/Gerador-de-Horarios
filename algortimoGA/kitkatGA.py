@@ -108,45 +108,53 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
     estatisticas.register("std", numpy.std)
     estatisticas.register("min", numpy.min)
     estatisticas.register("max", numpy.max)
-    
-    t2 = time.time()
-    populacao, info = algorithms.eaSimple(populacao,toolbox,
-                        probabilidade_crossver,probabilidade_mutacao,
-                        num_geracoes,estatisticas)
+    melhor=[]
+    try:
+        t2 = time.time()
+        populacao, info = algorithms.eaSimple(populacao,toolbox,
+                                probabilidade_crossver,probabilidade_mutacao,
+                                num_geracoes,estatisticas)
 
 
-    melhor = tools.selBest(populacao,1)
+        melhor = tools.selBest(populacao,1)
     
-    valores_grafico = info.select("min")
-    plt.plot(valores_grafico)
-    plt.title('Acompanhamento dos valores')
-    print()
-    dList = GeradorObject.get_list_horarios_by_enum()
-    melhor = GeradorObject.recreateDisciplines(disciplines,dList,melhor[0],QUANTIDADE_AULAS_POR_DISCIPLINA)
+        
+        valores_grafico = info.select("min")
+        plt.plot(valores_grafico)
+        plt.title('Acompanhamento dos valores')
+        print()
+        dList = GeradorObject.get_list_horarios_by_enum()
+        melhor = GeradorObject.recreateDisciplines(disciplines,dList,melhor[0],QUANTIDADE_AULAS_POR_DISCIPLINA)
+    except ValueError as e:
+        print()
+        print('Entrada de individuos e gerações invalida, verifique se o numero de individuos é maior igual que o numero de gerações.')
+    
     lcc_list = []
     si_list = []
-    for i in melhor:
-        if i.curso == "lcc":
-            lcc_list.append(i)
+    if len(melhor) != 0:
+        for i in melhor:
+            if i.curso == "lcc":
+                lcc_list.append(i)
+            else:
+                si_list.append(i)
+        s = lcc_list
+        l = si_list
+        lcc_list = sorted(s,key=lambda discipline: discipline.periodo, reverse=False)
+        si_list = sorted(l,key= lambda discipline: discipline.periodo, reverse=False)
+
+        
+
+        temp2 = time.time() - t2
+        minutos = temp2/60
+        exportador = Export(SERVER_DIRECTORY_SAVE)
+        
+        exportador.export_csv_by_type("si", si_list) 
+        exportador.export_csv_by_type("lcc", lcc_list)
+        exportador.export_graphic(plt)
+        if crossover == 1:
+            exportador.export_time_process(numero_individuos,num_geracoes,taxa_mutacao,"Cruzamento um corte",minutos)
         else:
-            si_list.append(i)
-    s = lcc_list
-    l = si_list
-    lcc_list = sorted(s,key=lambda discipline: discipline.periodo, reverse=False)
-    si_list = sorted(l,key= lambda discipline: discipline.periodo, reverse=False)
-
+            exportador.export_time_process(numero_individuos,num_geracoes,taxa_mutacao,"Cruzamento dois cortes",minutos)
+        print()
+        print("Melhores resultados enviados para: "+SERVER_DIRECTORY_SAVE+"folders_kitkat/exports !")
     
-
-    temp2 = time.time() - t2
-    minutos = temp2/60
-    exportador = Export(SERVER_DIRECTORY_SAVE)
-    
-    exportador.export_csv_by_type("si", si_list) 
-    exportador.export_csv_by_type("lcc", lcc_list)
-    exportador.export_graphic(plt)
-    if crossover == 1:
-        exportador.export_time_process(numero_individuos,num_geracoes,taxa_mutacao,"Cruzamento um corte",minutos)
-    else:
-        exportador.export_time_process(numero_individuos,num_geracoes,taxa_mutacao,"Cruzamento dois cortes",minutos)
-    print()
-    print("Melhores resultados enviados para: "+SERVER_DIRECTORY_SAVE+"folders_kitkat/exports !")
