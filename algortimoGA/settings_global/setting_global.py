@@ -21,3 +21,8 @@ ARCHIVE_JSON_SALAS='salas.txt'
 URL_HORARIO="http://%s:%s/%s"%(SERVER_HOST,SERVER_PORT,"horario")
 URL_DISCIPLINA="http://%s:%s/%s"%(SERVER_HOST,SERVER_PORT,"discipline")
 URL_SALA="http://%s:%s/%s"%(SERVER_HOST,SERVER_PORT,"sala")
+
+# ARCHIVES CSV 
+DISCIPLINA_CSV = "disciplines.csv"
+HORARIO_CSV = "horarios.csv"
+SALA_CSV = "salas.csv"

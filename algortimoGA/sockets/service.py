@@ -130,7 +130,7 @@ class KitKatWebService(object):
            if res:
                 cherrypy.response.body = {"success" :'Dados alimentados com sucesso',"message": "Sender Discipline OK"}
            else:
-               cherrypy.response.body = {"success" :'Dados alimentados com sucesso',"message": "Sender Discipline FAIL"}
+               cherrypy.response.body = {"success" :'Erro ao inserir dados do tipo disciplina',"message": "Sender Discipline FAIL"}
            return cherrypy.response.body
     
    @cherrypy.expose
@@ -151,7 +151,7 @@ class KitKatWebService(object):
            if res:
                 cherrypy.response.body = {"success" :'Dados alimentados com sucesso',"message": "Sender Horarios OK"}
            else:
-               cherrypy.response.body = {"success" :'Dados alimentados com sucesso',"message": "Sender Horarios FAIL"}
+               cherrypy.response.body = {"success" :'Erro ao inserir dados do tipo Horário',"message": "Sender Horarios FAIL"}
            return cherrypy.response.body
     
    @cherrypy.expose
@@ -172,7 +172,7 @@ class KitKatWebService(object):
            if res:
                 cherrypy.response.body = {"success" :'Dados alimentados com sucesso',"message": "Sender Salas OK"}
            else:
-               cherrypy.response.body = {"success" :'Dados alimentados com sucesso',"message": "Sender Salas FAIL"}
+               cherrypy.response.body = {"success" :'Erro ao inserir dados do tipo Sala',"message": "Sender Salas FAIL"}
            return cherrypy.response.body
 
 
