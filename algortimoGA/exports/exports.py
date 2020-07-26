@@ -33,7 +33,7 @@ class Export(object):
 
     def export_time_process(self,num_individual,num_geracao,taxa_mutacao,cruzamento,time_minutos,quantity_violations,indices):
         
-        with open(self.pathx+folder_input+CONST_EXPORT+"/time_execution.txt", mode="w") as outfile:
+        with open(self.pathx+folder_input+CONST_EXPORT+"/reports.txt", mode="w") as outfile:
             outfile.write("Quantidade De Individuos: %d "%(num_individual))
             outfile.write("\nQuantidade De Gerações:%d "%(num_geracao))
             outfile.write("\nTaxa De Mutação:%0.2f"%(taxa_mutacao))
