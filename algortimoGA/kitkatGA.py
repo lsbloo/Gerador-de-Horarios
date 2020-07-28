@@ -57,7 +57,7 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
         ativacoes =[]
         ativacoes.append(R1(disp))
         ativacoes.append(R2(disp))
-        ativacoes.append(R3(disp))
+        ativacoes.append(R3(disp,dList))
         ativacoes.append(R4(disp,dList))
 
         result = 0
@@ -146,7 +146,7 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
         ativacoes =[]
         ativacoes.append(R1(melhor))
         ativacoes.append(R2(melhor))
-        ativacoes.append(R3(melhor))
+        ativacoes.append(R3(melhor,dList))
         ativacoes.append(R4(melhor,dList))
 
         reports=""

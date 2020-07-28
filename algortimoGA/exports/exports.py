@@ -24,9 +24,9 @@ class Export(object):
     def export_csv_by_type(self,typex,dataset):
         with open(self.pathx+folder_input+CONST_EXPORT+"/"+typex+"-t1"+".csv", mode="w") as export_file:
             export_file_writer = csv.writer(export_file,delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            export_file_writer.writerow(["nome","curso","periodo","horario1", "horario2"])
+            export_file_writer.writerow(["nome","professor","curso","periodo","horario1", "horario2"])
             for disciplina in dataset:
-                export_file_writer.writerow([disciplina.name,disciplina.curso,disciplina.periodo,disciplina.list_classes[0].horario.id,disciplina.list_classes[1].horario.id])
+                export_file_writer.writerow([disciplina.name,disciplina.professor,disciplina.curso,disciplina.periodo,disciplina.list_classes[0].horario.id,disciplina.list_classes[1].horario.id])
         export_file.close()
     def export_graphic(self,graphic):
         graphic.savefig(self.pathx+folder_input+CONST_EXPORT+"/"+"graphic_best")

@@ -137,29 +137,42 @@ def get_violations_R2(disp,list_professores):
     
 """
     Para avaliar o cromossomo é levado em consideração o seguinte: 
-    a mesma disciplina não pode ter aula no mesmo dia
+    uma disciplina não pode ter mais de duas aulas no mesmo dia.
 """
-def R3(disciplines):
+def R3(disciplines,dList):
     l = set(disciplines)
     disp=[]
     for i in l:
         disp.append([i.name,i.professor,i.list_classes])
-    violation = counter_disp_horarios_equals(disp)
+    violation = counter_disp_horarios_equals(disp,dList)
     if violation == 0:
         return {"violations": 0}
     return {"violations": violation}
 
+def getDiaHorarios(dList):
+    q = []
+    for horario_id in dList:
+        splitter = horario_id.split("_")
+        q.append(splitter[0])
+    d = list(set(q))
+    return d
+def splitter_counter(horario_id):
+    return horario_id.split("_")[0]
 
-def counter_disp_horarios_equals(disp):
+def counter_disp_horarios_equals(disp,dList):
     violation=0
+    dias_horarios = getDiaHorarios(dList)
     for i in range(len(disp)):
         aulas=[]
         for horario_index in range(len(disp[i][2])):
             aulas.append(disp[i][2][horario_index].horario.id)
-            counter = Counter(aulas)
-            for values in counter.values():
-                if values>=2:
-                    violation+=1
+        xd = []
+        for aula in aulas:
+            cont=0
+            re = splitter_counter(aula)
+            xd.append(re)
+        if xd.count(re) >=2:
+            violation+=1
     return violation
 
 ###################################################################################################################
