@@ -214,3 +214,50 @@ def search_ocorrencia_15h(disp,horarios_15H):
 ###################################################################################################################
 
 
+"""
+    Para avaliar o cromossomo é levado em consideração o seguinte: 
+    professores que dão aula em 1 dia serão penalizados,
+    professores que dão aula em mais de 3 dias serão penalizados.
+
+"""
+def R5(disciplines):
+    l = set(disciplines)
+    disp=[]
+    distinct_professor=[]
+    for i in l:
+        disp.append([i.professor,i.list_classes])
+        distinct_professor.append(i.professor)
+    
+    dd = list(set(distinct_professor))
+    packets_aula = packets_aulas_professor(disp)
+    violations = counter_aulas_na_semana_por_professor(dd,packets_aula)
+
+    if violations == 0:
+        return {"violations": 0}
+    return {"violations": violations}
+
+def find_aulas_by_professor(professor,packets_aulas_professor):
+    find=[]
+    for packets in packets_aulas_professor:
+        if professor == packets[0]:
+            find.append(packets[1])
+    
+    return find
+
+def counter_aulas_na_semana_por_professor(list_professores,packets_aulas_professor):
+    violations=0
+    for professor in list_professores:
+        q = find_aulas_by_professor(professor,packets_aulas_professor)
+        res = list(set(q))
+        if len(res) == 1 or len(res) >=3:
+            violations+=1     
+    return violations
+
+def packets_aulas_professor(disp):
+    packets_aula=[]
+    for i in range(len(disp)):
+        for k in range(len(disp[i])):
+            packets_aula.append([disp[i][0],splitter_counter(disp[i][1][k].horario.id)])
+    return packets_aula
+    
+##############################################################################################

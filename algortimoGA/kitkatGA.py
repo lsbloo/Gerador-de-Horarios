@@ -12,7 +12,7 @@ from deap import tools
 import matplotlib.pyplot as plt
 import sys
 import time
-from ativacoes import R1,R2,R3,R4
+from ativacoes import R1,R2,R3,R4,R5
 from geratores import GeradorObject
 from exports.exports import Export
 
@@ -27,7 +27,7 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
     
     QUANTIDADE_AULAS = QUANTIDADE_DISCIPLINAS * QUANTIDADE_AULAS_POR_DISCIPLINA
 
-    pesos = [1000,1000,10,1]
+    pesos = [1000,1000,10,1,1]
 
     toolbox = base.Toolbox()
     # define a função de avaliação com os pesos 1 (solução otima) , 0 (solução pessima)
@@ -59,6 +59,8 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
         ativacoes.append(R2(disp))
         ativacoes.append(R3(disp,dList))
         ativacoes.append(R4(disp,dList))
+        ativacoes.append(R5(disp))
+
 
         result = 0
         for i in range(len(ativacoes)):
@@ -121,7 +123,10 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
         
         valores_grafico = info.select("min")
         plt.plot(valores_grafico)
-        plt.title('Acompanhamento dos valores')
+        plt.title("Evolução da aptidão do melhor indivíduo ao longo das gerações")
+        plt.xlabel("Geração")
+        plt.ylabel("Fitness do Melhor Indivíduo")
+
         print()
         dList = GeradorObject.get_list_horarios_by_enum()
         melhor = GeradorObject.recreateDisciplines(disciplines,dList,melhor[0],QUANTIDADE_AULAS_POR_DISCIPLINA)
@@ -148,6 +153,8 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
         ativacoes.append(R2(melhor))
         ativacoes.append(R3(melhor,dList))
         ativacoes.append(R4(melhor,dList))
+        ativacoes.append(R5(melhor))
+
 
         reports=""
         quantity_violation=0
