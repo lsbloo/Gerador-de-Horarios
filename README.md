@@ -58,9 +58,9 @@ For building and running the application you need:
   * Help
          -> python3 main.py --help
          
-<!--
-### Example helper
 
-![Screenshot](htkbot.png 'Exemplo helper')
---!>
+### Graphic Best Individuals
+
+![Screenshot](grafico.jpg 'Exemplo helper')
+
 
