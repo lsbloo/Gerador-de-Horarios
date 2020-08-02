@@ -21,6 +21,10 @@ SOFTWARE.
 -->
 Têmis
 ====
+
+[![Documentation](https://img.shields.io/badge/docs-apache.org-blue.svg)](https://superset.incubator.apache.org)
+
+
 ## Table of content
 - [Iniciando]
 - [Dependencias](
