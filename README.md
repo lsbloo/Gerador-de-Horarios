@@ -23,7 +23,7 @@ Têmis :books: :school:
 ====
 
 
-#### Click Here. :point_down:
+#### Vídeo Tutorial. :point_down:
 [![Install](htkbotimg.png)](https://youtu.be/eut2DwJIDP4 "Install V1")
 
 
