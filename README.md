@@ -19,12 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
-GeradorHorários UFPB :books: :school:
+Gerador de Quadro de Horários :books: :school:
 ====
 
 
 #### Vídeo Tutorial. :point_down:
 
-
+* https://youtu.be/eut2DwJIDP4
 
 
