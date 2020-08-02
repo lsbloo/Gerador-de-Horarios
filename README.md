@@ -29,4 +29,38 @@ Gerador de Quadro de Horários :books: :school:
 
 * https://youtu.be/eut2DwJIDP4
 
+## Table of content
+- [Getting Started]
+- [Requirements](
+- [How to Build]
+- [How to Run]
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Requirements
+
+For building and running the application you need:
+
+- Localize requeriments.txt 
+- apply this comand pip3 install -r requeriments.txt
+
+#### Environment Variables
+
+- SERVER_PORT=8080
+- SERVER_HOST=0.0.0.0
+- SERVER_DIRECTORY_SAVE=/home/osvaldoairon/
+
+
+### How to Run
+
+  * Help
+         -> python3 main.py --help
+         
+<!--
+### Example helper
+
+![Screenshot](htkbot.png 'Exemplo helper')
+--!>
 
