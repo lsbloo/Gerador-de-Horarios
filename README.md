@@ -55,9 +55,10 @@ For building and running the application you need:
 
 ### How to Run
 
-  * Help
-         -> python3 main.py --help
+  * First Step: Read Manual
+         -> python3 main.py --man
          
+### Manual
 
 ### Graphic Best Individuals
 
