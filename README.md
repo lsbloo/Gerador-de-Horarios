@@ -30,38 +30,40 @@ Gerador de Quadro de Horários :books: :school:
 * https://youtu.be/eut2DwJIDP4
 
 ## Table of content
-- [Getting Started]
-- [Requirements](
-- [How to Build]
-- [How to Run]
+- [Iniciando...]
+- [Depedências]
+- [Variáveis de Ambiente]
+- [Como Executar]
+- [Exemplo Manual]
+- [Gráfico Fitness]
 
-## Getting Started
+## Iniciando...
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+Essas instruções fornecerão uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste.
 
-### Requirements
+### Depedências
 
-For building and running the application you need:
+Para compilar e executar a ferramenta você deve:
 
-- Localize requeriments.txt 
-- apply this comand pip3 install -r requeriments.txt
+- Localizar requeriments.txt 
+- Aplicar o comando pip3 install -r requeriments.txt
 
-#### Environment Variables
+#### Variáveis de Ambiente
 
 - SERVER_PORT=8080
 - SERVER_HOST=0.0.0.0
 - SERVER_DIRECTORY_SAVE=/home/osvaldoairon/
 
 
-### How to Run
+### Como Executar
 
   * First Step: Read Manual
          -> python3 main.py --man
          
-### Manual
+### Exemplo Manual
 ![Screenshot](example_manual.png 'Manual')
 
-### Graphic Best Individuals
+### Gráfico Fitness
 
 ![Screenshot](grafico.jpg 'Gráfico')
 
