@@ -24,7 +24,7 @@ Têmis :books: :school:
 
 
 #### Vídeo Tutorial. :point_down:
-[![Install](build-icon.png=250)](https://youtu.be/eut2DwJIDP4 "Install V1")
+[![Install](https://youtu.be/eut2DwJIDP4 "Install V1")
 
 
 
