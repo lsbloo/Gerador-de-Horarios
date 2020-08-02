@@ -59,7 +59,8 @@ For building and running the application you need:
          -> python3 main.py --man
          
 ### Manual
-![Screenshot](grafico.jpg 'Manual')
+![Screenshot](example_manual.png 'Manual')
+
 ### Graphic Best Individuals
 
 ![Screenshot](grafico.jpg 'Gráfico')
