@@ -22,7 +22,7 @@ SOFTWARE.
 Gerador de Quadro de Horários :books: :school:
 ====
 <p> 
-    Realiza o processo de criação de quadro de horários dentro de uma instituição de acordo com uma série de restrições implementadas que podem ser customizadas. A ferramenta é baseada em algoritmos genéticos e possui recursos para visualização de restrições violadas, gráfico de valores do melhor fitness do indivíduo a cada geração e importação de dados cadastrais a partir de arquivos .csv ou .json      
+    Realiza o processo de criação de quadro de horários dentro de uma instituição de acordo com uma série de restrições implementadas que podem ser customizadas. A ferramenta é baseada em algoritmos genéticos e possui recursos para visualização de restrições violadas, gráfico de valores do melhor fitness do indivíduo a cada geração e importação de dados cadastrais a partir de arquivos .csv ou .json. Ao final da execução são exportados os quadros de horários do melhor indivíduo juntamente com o gráfico e o arquivo de informações adicionais.      
 </p>
 
 #### Vídeo Tutorial. :point_down:
