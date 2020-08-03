@@ -33,19 +33,18 @@ id,periodo,credito,professor,nome,curso
 12,p3,4,Substituto,Lógica,lcc
 13,p3,4,Wendhel,Álgebra Linear,lcc
 14,p3,4,Rodrigo Vilar,POO,lcc
-15,p4,4,Pasqueline,Mod. de dados,lcc
-16,p4,4,Raquel,SO,lcc
-17,p4,4,Pasqueline,Mod. de dados,lcc
-18,p4,4,Pasqueline,Pesquisa Aplicada,lcc
-19,p4,4,Joelson,Ling. Declarativas,lcc
-20,p5,4,DSCA,Empreend.,lcc
-21,p5,4,Joelson,Teoria da Comp.,lcc
-22,p5,4,Vanessa,Banco de Dados,lcc
-23,p5,4,Augusto,Redes,lcc
-24,p6,4,Thaise,Sistemas Multimídia,lcc
-25,p6,4,Rodrigo Vilar,Análise e Projeto,lcc
-26,p6,4,Joseilme,Estatística,lcc
-27,p7,4,Flávia,EAD,lcc
-28,p7,4,Leandro,Eng. de Software,lcc
-29,p7,4,Flávia,PMI,lcc
-31,p7,4,Thaise,ESII,lcc
+15,p4,4,Raquel,SO,lcc
+16,p4,4,Pasqueline,Mod. de dados,lcc
+17,p4,4,Pasqueline,Pesquisa Aplicada,lcc
+18,p4,4,Joelson,Ling. Declarativas,lcc
+19,p5,4,DSCA,Empreend.,lcc
+20,p5,4,Joelson,Teoria da Comp.,lcc
+21,p5,4,Vanessa,Banco de Dados,lcc
+22,p5,4,Augusto,Redes,lcc
+23,p6,4,Thaise,Sistemas Multimídia,lcc
+24,p6,4,Rodrigo Vilar,Análise e Projeto,lcc
+25,p6,4,Joseilme,Estatística,lcc
+26,p7,4,Flávia,EAD,lcc
+27,p7,4,Leandro,Eng. de Software,lcc
+28,p7,4,Flávia,PMI,lcc
+29,p7,4,Thaise,ESII,lcc
