@@ -261,3 +261,36 @@ def packets_aulas_professor(disp):
     return packets_aula
     
 ##############################################################################################
+
+
+"""
+    Para avaliar o cromossomo:
+        Aulas as 13H serão penalizadas.
+"""
+def R6(disciplines,dList):
+    l = set(disciplines)
+    disp=[]
+    param= "13H"
+    for i in l:
+        disp.append([i.list_classes])
+    horarios_13H = get_horarios_13H(dList,param)
+    violations = search_ocorrencia_13h(disp,horarios_13H)
+    if violations == 0:
+        return {"violations": 0}
+    return {"violations": violations}
+
+def get_horarios_13H(dList,param):
+    result=[]
+    for horario in dList:
+        if horario.find(param) != -1:
+            result.append(horario)
+    return result
+
+def search_ocorrencia_13h(disp,horarios_13H):
+    violations=0
+    for i in range(len(disp)):
+        for n in range(len(disp[i])):
+            for z in range(len(disp[i][n])):
+                if disp[i][n][z].horario.id in horarios_13H:
+                    violations+=1
+    return violations

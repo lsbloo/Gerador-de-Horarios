@@ -30,7 +30,6 @@ Scrapy==1.8.0
 service-identity==18.1.0
 six==1.14.0
 sqlparse==0.3.0
-Twisted==19.10.0
 urllib3==1.25.8
 virtualenv==16.7.9
 w3lib==1.21.0
@@ -42,5 +41,4 @@ websocket==0.2.1
 websocket-client==0.57.0
 httputil==0.6.7
 python-dotenv==0.14.0
-pickle5 == 0.0.11
 pyfiglet==0.7 

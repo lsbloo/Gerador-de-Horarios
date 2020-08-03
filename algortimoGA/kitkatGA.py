@@ -4,7 +4,6 @@ import os
 import random
 import numpy
 import json
-import pickle
 from deap import base
 from deap import creator
 from deap import algorithms
@@ -12,7 +11,7 @@ from deap import tools
 import matplotlib.pyplot as plt
 import sys
 import time
-from ativacoes import R1,R2,R3,R4,R5
+from ativacoes import R1,R2,R3,R4,R5,R6
 from geratores import GeradorObject
 from exports.exports import Export
 
@@ -27,7 +26,7 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
     
     QUANTIDADE_AULAS = QUANTIDADE_DISCIPLINAS * QUANTIDADE_AULAS_POR_DISCIPLINA
 
-    pesos = [1000,1000,10,1,1]
+    pesos = [1000,1000,10,10,1,1]
 
     toolbox = base.Toolbox()
     # define a função de avaliação com os pesos 1 (solução otima) , 0 (solução pessima)
@@ -60,6 +59,8 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
         ativacoes.append(R3(disp,dList))
         ativacoes.append(R4(disp,dList))
         ativacoes.append(R5(disp))
+        ativacoes.append(R6(disp,dList))
+
 
 
         result = 0
@@ -154,6 +155,7 @@ def kitkatGA(populacao,numero_geracoes,taxa_mutacao,crossover):
         ativacoes.append(R3(melhor,dList))
         ativacoes.append(R4(melhor,dList))
         ativacoes.append(R5(melhor))
+        ativacoes.append(R6(melhor,dList))
 
 
         reports=""
