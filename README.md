@@ -29,6 +29,10 @@ Gerador de Quadro de Horários :books: :school:
 
 * https://youtu.be/eut2DwJIDP4
 
+#### Vídeo Tutorial (Customização e Adição de Restrições). :point_down:
+
+* https://youtu.be/KsAA7PJiZ6U
+
 ## Table of content
 - [Iniciando...]
 - [Depedências]
